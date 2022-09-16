@@ -57,3 +57,6 @@ gem 'pry-rails'
 
 gem 'rack-cors' 
 gem 'bcrypt'
+
+gem 'knock'
+gem 'jwt'
