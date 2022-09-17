@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import { Route, HashRouter as Router, Link } from 'react-router-dom';
-
+import ChatroomPage from './components/ChatroomPage';
 
 
 function App() {
@@ -27,7 +27,7 @@ function App() {
             <Link to="#">{settingIcon}</Link>
             <Link to="#">{homeIcon}</Link>  
             <Link to="#">{accountIcon}</Link>
-            <Link to="#">{chatIcon}</Link>
+            <Link to="/chatroom">{chatIcon}</Link> 
             <Link to="#">{groupChatIcon}</Link>
             <Link to="#">{weatherIcon}</Link>
             <Link to="#">{calendarIcon}</Link>
@@ -36,6 +36,7 @@ function App() {
           <main>
             {/* all Components here */}
             <div className='test'>DIV test</div>
+              <Route exact path ="/chatroom" component={ChatroomPage} />
           </main>
 
         </div>

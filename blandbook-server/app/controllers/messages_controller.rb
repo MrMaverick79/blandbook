@@ -7,7 +7,7 @@ class MessagesController < ApplicationController
     @message = Message.create message_params
     
     #the below is needed for the chatrooom / messaging to work
-    @chatroom Chatroom.find(@message[:chatroom_id])
+    @chatroom = Chatroom.find(@message[:chatroom_id])
 
     ChatroomChannel.broadcast_to(@channel, @message)
       render json: @message
@@ -28,6 +28,7 @@ class MessagesController < ApplicationController
     respond_to do |format|
       format.html
       format.json{render json: @message} #add an includes: here???
+    end
   end
 
   def edit

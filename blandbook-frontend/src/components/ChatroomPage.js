@@ -16,7 +16,7 @@ function ChatroomPage({ loggedInUser }) {
         useEffect(() => {
 
             //createConsumer creates a connection to the backend, using a route that is found in the ActionCable in Rails. It uses a WebSocket to do this.
-            cable = createConsumer("ws://localhost:3000/cable")
+            const cable = createConsumer("ws://localhost:3000/cable")
 
 
             //Below we are creating a package of data to send acrtoss the connection formed above. It contained the channel we are going to subscribe to and the instance id.
@@ -64,3 +64,5 @@ function ChatroomPage({ loggedInUser }) {
 
 
 }  //end ChatroomPage
+
+export default ChatroomPage
