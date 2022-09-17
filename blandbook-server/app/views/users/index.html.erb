@@ -1,0 +1,17 @@
+
+<h2>All Users</h2>
+
+<% @users.each do |item| %>
+    <div>
+        email: <%= item.email %>
+        <br>
+        screen_name: <%= item.screen_name %>
+        <br>
+        location: <%= item.location %>
+        <br>
+        avatar: <%= item.avatar %>
+        <br>
+        is_admin: <%= item.is_admin %>
+        <br><br><br>
+    </div>
+<% end %>

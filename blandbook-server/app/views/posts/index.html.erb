@@ -1,0 +1,15 @@
+<h2>All Posts</h2>
+
+
+<% @posts.each do |item| %>
+    <div>
+        Sender: <%= item.user.screen_name %>
+        <br>
+        title: <%= item.title %>
+        <br>
+        like: <%= item.like %>
+        <br>
+        dislike: <%= item.dislike %>
+        <br><br><br>
+    </div>      
+<% end %>
