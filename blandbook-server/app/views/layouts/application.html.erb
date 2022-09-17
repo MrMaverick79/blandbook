@@ -10,6 +10,34 @@
   </head>
 
   <body>
+    <header>
+      <h1>Welcome to BlandBook.</h1>
+
+      <%= link_to 'Home', root_path %>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+
+      <%= link_to 'Users', users_path %>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+
+      <%= link_to 'Posts', posts_path %>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+
+      <%= link_to 'Chatrooms', chatrooms_path %>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+
+      <%= link_to 'Comments', comments_path %>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+
+      <%= link_to 'Messages', messages_path %>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+
+      <%= link_to 'Urls', urls_path %>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+
+      <%= link_to 'All Json data together', '/alldata' %>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+    
+    </header>
     <%= yield %>
   </body>
 </html>

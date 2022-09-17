@@ -1,0 +1,19 @@
+<h2>All Messages</h2>
+
+
+<% @messages.each do |item| %>
+        <div>
+                Sender: <%= item.user.screen_name %>
+                <br>
+                Group Chat: <%= item.chatroom.title %>
+                <br>
+                content: <%= item.content %>
+                <br>
+                like: <%= item.like %>
+                <br>
+                dislike: <%= item.dislike %>
+                <br>
+                is_image: <%= item.is_image %>
+                <br><br><br>
+        </div>      
+<% end %>

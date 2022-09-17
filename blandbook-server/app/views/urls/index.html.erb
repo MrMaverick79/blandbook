@@ -1,0 +1,12 @@
+<h2>All Urls</h2>
+
+<% @urls.each do |item| %>
+    <div>
+        Post: <%= item.post.title %>
+        <br>
+        url: <%= item.url %>
+        <br>
+        public or not: <%= item.public %>
+        <br><br><br>
+    </div>
+<% end %>
