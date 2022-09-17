@@ -5,6 +5,12 @@ class MessagesController < ApplicationController
 
   def create
     @message = Message.create message_params
+    
+    #the below is needed for the chatrooom / messaging to work
+    @chatroom Chatroom.find(@message[:chatroom_id])
+
+    ChatroomChannel.broadcast_to(@channel, @message)
+      render json: @message
   end
 
   def index
@@ -44,7 +50,8 @@ class MessagesController < ApplicationController
 
   def message_params
 
-    params.require(:message).permit(:content, :response, :like, :dislike, :user_id, :chatroom_id, :is_image)
+    #there are some extra params in here to facilitate the chat function
+    params.require(:message).permit(:content, :response, :like, :dislike, :user_id, :chatroom_id, :is_image, :read)
 
   end
 
