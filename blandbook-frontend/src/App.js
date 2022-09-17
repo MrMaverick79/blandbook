@@ -25,7 +25,7 @@ function App() {
           <nav>
             {/* all a_tags here */}
             <Link to="#">{settingIcon}</Link>
-            <Link to="#">{homeIcon}</Link>
+            <Link to="#">{homeIcon}</Link>  
             <Link to="#">{accountIcon}</Link>
             <Link to="#">{chatIcon}</Link>
             <Link to="#">{groupChatIcon}</Link>
