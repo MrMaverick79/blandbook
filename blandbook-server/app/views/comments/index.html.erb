@@ -1,0 +1,18 @@
+
+<h2>All Comments</h2>
+
+<% @comments.each do |item| %>
+    <div>
+        Sender: <%= item.user.screen_name %>
+        <br>
+        Post: <%= item.post.title %>
+        <br>
+        comment: <%= item.content %>
+        <br>
+        like: <%= item.like %>
+        <br>
+        dislike: <%= item.dislike %>
+        <br><br><br>
+    </div>
+<% end %>
+
