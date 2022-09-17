@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom';
-import * as serviceWorker from './serviceWorker';
+import * as serviceWorker from './serviceWorkerRegistration';
 import actionCable from 'actioncable';
 
 const CableApp = {}
