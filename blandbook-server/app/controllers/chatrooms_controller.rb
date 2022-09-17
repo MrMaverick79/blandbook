@@ -1,8 +1,10 @@
 class ChatroomsController < ApplicationController
   def new
+    @chatroom = Chatroom.new
   end
 
   def create
+    @chatroom = Chatroom.create chatroom_params
   end
 
   def index
@@ -15,15 +17,30 @@ class ChatroomsController < ApplicationController
   end
 
   def show
+    @chatroom =  Chatroom.find params[:id]
+
   end
 
   def edit
+    @chatroom =  Chatroom.find params[:id]
   end
 
   def update
+    @chatroom =  Chatroom.find params[:id]
+    @chatroom.update chatroom_params
   end
 
   def destroy
+    Chatroom.destroy params[:id]
+    redirect_to comments_path
+  end
+
+  private
+
+  def chatroom_params # strong params
+
+    params.require(:chatroom).permit(:title, :image, :owner)
+
   end
 
 end
