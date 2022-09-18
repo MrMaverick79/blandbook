@@ -26,7 +26,7 @@ Rails.application.routes.draw do
 
   
   #this line mounts the Action Cable, which is needed for the chat function. It provides the connection between the back end and the front end. 
-  # mount ActionCable.server => "/cable"
+  mount ActionCable.server => "/cable"
 
 
 
