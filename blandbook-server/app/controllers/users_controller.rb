@@ -17,6 +17,9 @@ class UsersController < ApplicationController
   end
 
   def show
+    # for frontend test
+    user = User.last
+    render json:user
   end
 
   def edit

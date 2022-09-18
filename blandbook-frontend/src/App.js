@@ -29,9 +29,7 @@ class App extends React.Component {
 
     //I could probably use axios here and we already have the json. This is for the chatroom. The id is fetched from the url, so url must match the room_id 
     getRoomData = async( id ) => {
-
-
-       const res  = await axios.get(`http://localhost:3000/chatrooms/${id}.json`)
+      const res  = await axios.get(`http://localhost:3000/chatrooms/${id}.json`)
        console.log(res);
        this.setState({
               currentRoom:{
@@ -73,7 +71,7 @@ class App extends React.Component {
                   <Link to="#">{settingIcon}</Link>
                   <Link to="#">{homeIcon}</Link>  
                   <Link to="#">{accountIcon}</Link>
-                  <Link to="/chatrooms/:id">{chatIcon}</Link> 
+                  <Link to="/chatrooms/3">{chatIcon}</Link> 
                   <Link to="#">{groupChatIcon}</Link>
                   <Link to="#">{weatherIcon}</Link>
                   <Link to="#">{calendarIcon}</Link>
@@ -82,6 +80,7 @@ class App extends React.Component {
                 <main>
                   {/* all Components here */}
                   <div className='test'>DIV test</div>
+                  
                     <Route exact path ="/chatrooms/:id" render={ (props) => { return this.state.currentUser ?
                     (<ChatroomShow
                         {...props}
