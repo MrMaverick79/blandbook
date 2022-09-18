@@ -33,14 +33,13 @@ class ChatroomShow extends React.Component {
 
             content: this.state.newMessage,
             user_id: this.props.currentUser.id,
-            room_id: this.props.roomData.chatroom.id
+            chatroom_id: this.props.roomData.chatroom.id
 
         }
 
         //post a message to the server using another axios rquest
-        const res = await axios.post("http://localhost:3000/messages",{
-            content: this.state.newMessage
-        })
+        const res = await axios.post("http://localhost:3000/messages",message
+        )
         console.log(res.data)
 
         

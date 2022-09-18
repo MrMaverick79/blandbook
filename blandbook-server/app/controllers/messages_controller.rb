@@ -10,18 +10,18 @@ class MessagesController < ApplicationController
     @message = Message.new message_params
     
     #the below is needed for the chatrooom / messaging to work
-    @chatroom = Chatroom.find message_params["room_id"]
+    @chatroom = Chatroom.find message_params["chatroom_id"]
 
-    if message.save
-        ChatroomChannel.broadcast_to( chatroom, {
+    if @message.save
+        ChatroomChannel.broadcast_to( @chatroom, {
 
-          chatroom: ChatroomSerializer.new(chatroom),
-          users: UserSerializer.new(chatroom.users),
-          messages: MessageSerializer.new(chatroom.messages)
+          chatroom: ChatroomSerializer.new(@chatroom),
+          users: UserSerializer.new(@chatroom.users),
+          messages: MessageSerializer.new(@chatroom.messages)
 
         })
     end #end if
-      render json: MessageSerializer.new(message) 
+      render json: MessageSerializer.new(@message) 
       
       
   end
@@ -65,9 +65,9 @@ class MessagesController < ApplicationController
   def message_params
 
     #there are some extra params in here to facilitate the chat function
-    params.permit(:headers, :body, :message, :content, :response, :like, :dislike, :user_id, :chatroom_id, :is_image, :read, :room_id)
+    # params.permit(:headers, :body, :message, :content, :response, :like, :dislike, :user_id, :chatroom_id, :is_image, :read, :room_id)
     # For local creaion of messages:
-    # params.require(:message).permit(:content, :response, :like, :dislike, :user_id, :chatroom_id, :is_image, :read, :room_id)
+    params.require(:message).permit(:content, :response, :like, :dislike, :user_id, :chatroom_id, :is_image, :read, :chatroom_id)
 
   end
 
