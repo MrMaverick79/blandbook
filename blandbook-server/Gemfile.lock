@@ -78,6 +78,8 @@ GEM
     crass (1.0.6)
     erubi (1.11.0)
     execjs (2.8.1)
+    fast_jsonapi (1.5)
+      activesupport (>= 4.2)
     ffi (1.15.5)
     globalid (1.0.0)
       activesupport (>= 5.0)
@@ -210,6 +212,7 @@ DEPENDENCIES
   capybara (>= 2.15)
   chromedriver-helper
   coffee-rails (~> 4.2)
+  fast_jsonapi
   jbuilder (~> 2.5)
   jwt
   knock
