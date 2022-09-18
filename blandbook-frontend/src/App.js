@@ -4,6 +4,7 @@ import { Route, HashRouter as Router, Link, Redirect } from 'react-router-dom';
 import ChatroomShow from './components/ChatroomShow';
 import React from 'react';
 import axios from 'axios';
+import LoginMain from './components/LoginMain';
 
 
 const homeIcon = <span class="material-symbols-outlined">home_app_logo</span>
@@ -81,6 +82,8 @@ class App extends React.Component {
 
                 <main>
                   {/* all Components here */}
+                  <LoginMain />
+
                   <div className='test'>DIV test</div>
                     <Route exact path ="/chatrooms/:id" render={ (props) => { return this.state.currentUser ?
                     (<ChatroomShow
