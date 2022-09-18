@@ -31,8 +31,11 @@ class MyProfile extends React.Component{
     render(){
         return(
             <div>
-                <h1>Hello {this.state.currentUser.name}</h1>
-                <h4>Your email is {this.state.currentUser.email}</h4>
+
+                <img src={this.state.currentUser.avatar} alt={this.state.currentUser.screen_name} class="myprofile_avatar" />
+                Hello <strong>{this.state.currentUser.screen_name}</strong> 
+
+                <p>Your email is <strong>{this.state.currentUser.email}</strong> </p>
             </div>
         );
     } //render
