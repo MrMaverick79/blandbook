@@ -1,13 +1,36 @@
-.user_info {
-    text-align: right;
+.first_row_info {
+    display: flex;
+    /* border: 1px solid red; */
     vertical-align: middle;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 10px;
+}
+
+
+.avatar {
+    width: 30px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+
+
+.user_info {
+    display: block;
+    /* text-align: right; */
+    /* vertical-align: middle; */
     font-weight: bold;
-    padding-right: 20px;
-    padding-top: 10px;
+    /* padding-right: 20px; */
+    /* padding-top: 10px; */
     font-size: 14px;
     /* background-color: yellow; */
 }
 
+.search_form {
+    display: block;
+  
+}
 
 .search_form input[type='text'] {
     width: 200px;
@@ -22,4 +45,9 @@
 .search_form input[type='submit'] {
     font-size: 14px;
     border-style: none;
+    vertical-align: middle;
+}
+
+.first_row_info strong{
+    display: block;
 }

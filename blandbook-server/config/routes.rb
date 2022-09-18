@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   
   # for the frontend test
   get '/users/last_user' => 'users#show'
-
+  get '/users/:id/all_chat_rooms' => 'users#all_chat_rooms'
 
   
 

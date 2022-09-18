@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import '../css/user_info.css'
+
 
 class CurrentUserInfo extends React.Component {
 

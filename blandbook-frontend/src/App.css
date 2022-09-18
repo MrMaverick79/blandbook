@@ -58,14 +58,6 @@ main {
 }
 
 
-.avatar {
-  width: 30px;
-  border-radius: 50%;
-  vertical-align: middle;
-}
-
-.first_row_info{
-  display: flex;
-  border: 1px solid red;
-  vertical-align: middle;
+nav a{
+  color: black;
 }
