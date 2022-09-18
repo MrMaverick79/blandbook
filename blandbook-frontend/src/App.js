@@ -47,7 +47,9 @@ function App() {
           &copy; Blandbook @ 2022
         </footer>
 
-
+        {/* all route here */}
+        {/* <Route exact path="/" component={  } /> */}
+               
 
 
       </Router>
