@@ -4,10 +4,7 @@ class ApplicationController < ActionController::Base
     skip_before_action :verify_authenticity_token
 
     include Knock::Authenticable
-
-    def current
-        render json: current_user
-
-    end
+  
+  end
 
 end

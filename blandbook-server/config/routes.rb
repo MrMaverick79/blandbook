@@ -8,7 +8,6 @@ Rails.application.routes.draw do
 
 
 
-
   #these lines are needed for user authentication
   #this one gets the login token from knock
   post 'user_token' => 'user_token#create'
