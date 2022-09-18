@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   # all data in json file
   get '/alldata' => 'users#allData'
 
+  get '/users' => 'users#index'
+
 
 
   # these lines are needed for user authentication
