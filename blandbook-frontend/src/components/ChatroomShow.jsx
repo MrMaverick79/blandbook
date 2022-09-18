@@ -42,9 +42,6 @@ class ChatroomShow extends React.Component {
         )
         console.log(res.data)
 
-        
-       
-   
    
     }
 

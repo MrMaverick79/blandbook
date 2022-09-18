@@ -28,6 +28,16 @@ class UsersController < ApplicationController
   end
 
   def show
+    # for frontend test
+    user = User.last
+    render json:user
+  end
+
+  def all_chat_rooms
+    # for frontend test
+    user = User.find params[:id]
+    rooms = user.chatrooms
+    render json:rooms
   end
 
   def edit
