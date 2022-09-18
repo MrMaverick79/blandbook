@@ -1,4 +1,7 @@
 class ChatroomsController < ApplicationController
+  
+  skip_before_action :verify_authenticity_token, raise: false
+  
   def new
     @chatroom = Chatroom.new
   end
@@ -18,6 +21,9 @@ class ChatroomsController < ApplicationController
 
   def show
     @chatroom =  Chatroom.find params[:id]
+
+    render json: @chatroom
+    end
 
   end
 
