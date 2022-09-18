@@ -1,12 +1,12 @@
 
 .chat_container{
     width: 50%;
-    border: 1px solid red;
+    /* border: 1px solid red; */
 }
 
 .post_container{
     width: 50%;
-    border: 1px solid green;
+    /* border: 1px solid green; */
 }
 
 .all_chat_rooms ul {
