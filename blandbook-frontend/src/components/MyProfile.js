@@ -23,7 +23,7 @@ class MyProfile extends React.Component{
         })
         .then(res => {
             this.setState({currentUser: res.data})
-            console.log('myprofile currentuser', res.data); // for test
+            // console.log('myprofile currentuser', res.data); // for test
         })
         .catch(err => console.warn(err))
     }

@@ -30,7 +30,7 @@ class LoginMain extends React.Component{
         })
         .then(res => {
           this.setState({currentUser: res.data})
-          console.log('LoginMain', res.data) // for test
+        //   console.log('LoginMain', res.data) // for test
         })
         .catch(err => console.warn(err))
       }
