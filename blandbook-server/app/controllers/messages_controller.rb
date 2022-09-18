@@ -1,4 +1,7 @@
 class MessagesController < ApplicationController
+  
+  skip_before_action :verify_authenticity_token, raise: false
+  
   def new
     @message = Message.new
   end
@@ -10,14 +13,14 @@ class MessagesController < ApplicationController
     @chatroom = Chatroom.find message_params["room_id"]
 
     if message.save
-        ChatroomChannel.broadcast_to( chatroom {
+        ChatroomChannel.broadcast_to( chatroom, {
 
           chatroom: ChatroomSerializer.new(chatroom),
           users: UserSerializer.new(chatroom.users),
           messages: MessageSerializer.new(chatroom.messages)
 
         })
-      end #end if
+    end #end if
       render json: MessageSerializer.new(message) 
       
       
@@ -62,7 +65,9 @@ class MessagesController < ApplicationController
   def message_params
 
     #there are some extra params in here to facilitate the chat function
-    params.require(:message).permit(:content, :response, :like, :dislike, :user_id, :chatroom_id, :is_image, :read, :room_id)
+    params.permit(:headers, :body, :message, :content, :response, :like, :dislike, :user_id, :chatroom_id, :is_image, :read, :room_id)
+    # For local creaion of messages:
+    # params.require(:message).permit(:content, :response, :like, :dislike, :user_id, :chatroom_id, :is_image, :read, :room_id)
 
   end
 

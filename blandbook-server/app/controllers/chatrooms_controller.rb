@@ -15,15 +15,15 @@ class ChatroomsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json{render json: @chatrooms}
+      format.json{render json: @chatrooms, include: [:messages, :users]} ##Might not need this one here...might be too much information!
     end
   end
 
   def show
     @chatroom =  Chatroom.find params[:id]
 
-    render json: @chatroom
-    end
+    render json: @chatroom, include: [:messages, :users]
+    
 
   end
 

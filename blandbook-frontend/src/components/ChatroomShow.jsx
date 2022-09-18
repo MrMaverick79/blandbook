@@ -1,5 +1,8 @@
+import axios from "axios";
 import React from "react";
 import ChatroomWebSocket from "./ChatroomWebSocket";
+
+
 
 class ChatroomShow extends React.Component {
 
@@ -8,6 +11,44 @@ class ChatroomShow extends React.Component {
     }
 
     
+
+    //This takes the content of the input field and adds it to the state as a new message
+    handleMessageInput = ( e ) => {
+        this.setState({
+            newMessage: e.target.value
+        })
+    }
+
+    //After submission, clear the state so a new message can be added. Also prevent the submit button from refreshing the page
+    submitMessage = async ( e ) => {
+        e.preventDefault()
+        
+        this.setState({
+            newMessage: ''
+        })
+   
+        //Define the message to match the model created in Rails. Might need to add some more details here to enable the other features in message (such as likes or dislikes).
+
+        const message = {
+
+            content: this.state.newMessage,
+            user_id: this.props.currentUser.id,
+            room_id: this.props.roomData.chatroom.id
+
+        }
+
+        //post a message to the server using another axios rquest
+        const res = await axios.post("http://localhost:3000/messages",{
+            content: this.state.newMessage
+        })
+        console.log(res.data)
+
+        
+       
+   
+   
+    }
+
 
     render(){
 

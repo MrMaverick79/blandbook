@@ -3,6 +3,8 @@ import './App.css';
 import { Route, HashRouter as Router, Link, Redirect } from 'react-router-dom';
 import ChatroomShow from './components/ChatroomShow';
 import React from 'react';
+import axios from 'axios';
+
 
 const homeIcon = <span class="material-symbols-outlined">home_app_logo</span>
 const settingIcon = <span class="material-symbols-outlined">settings</span>
@@ -25,22 +27,23 @@ class App extends React.Component {
     }
 
 
-    //I could probably use axios here and we already have the json. This is for the chatroom
-    getRoomData = ( id ) => {
-      fetch(`http://localhost:3000/chatrooms/${id}`)
-      .then(response => response.json())  
-      .then (result => {
-          this.setState({
+    //I could probably use axios here and we already have the json. This is for the chatroom. The id is fetched from the url, so url must match the room_id 
+    getRoomData = async( id ) => {
+
+
+       const res  = await axios.get(`http://localhost:3000/chatrooms/${id}.json`)
+       console.log(res);
+       this.setState({
               currentRoom:{
-                  chatroom: result.data,
-                  users: result.data.attributes.users,
-                  messages: result.data.attributes.messages
+                  chatroom: res.data,
+                  users: res.data.users,
+                  messages: res.data.messages
 
-              }
+                } //end currentRoom 
 
-          })
+              }); //end setState
 
-      })
+        
   } //end getRoom Data
 
 
