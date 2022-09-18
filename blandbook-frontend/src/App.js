@@ -1,7 +1,8 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 import { Route, HashRouter as Router, Link } from 'react-router-dom';
 
+import LoginMain from './components/LoginMain';
 
 
 function App() {
@@ -35,6 +36,8 @@ function App() {
 
           <main>
             {/* all Components here */}
+
+            <LoginMain />
             <div className='test'>DIV test</div>
           </main>
 
@@ -48,7 +51,7 @@ function App() {
         </footer>
 
 
-
+       
 
       </Router>
     </div>
