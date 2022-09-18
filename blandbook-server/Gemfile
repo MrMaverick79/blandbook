@@ -59,4 +59,6 @@ gem 'rack-cors'
 gem 'bcrypt'
 
 gem 'knock'
+
+# use for authentication
 gem 'jwt'
