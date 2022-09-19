@@ -4,20 +4,20 @@ class ChatroomWebSocket extends React.Component {
 
     componentDidMount(){
 
-        //This is needed to render data on the ChatroomShow component. It grabs the room id_#, which is the last element in the URL
-        this.props.getRoomData(window.location.href.match(/\d+$/)[0]
-        )
-
+        //This is needed to render data on the ChatroomShow component. It grabs the room id_#, 
+        this.props.getRoomData(this.props.currentRoom.id)
+        console.log('The ChatroomWebSocket has recieved room', this.props.roomData.chatroom.id);
         //the subscriptions.create() here is sending params to the subscribed action in the ChatroomsChannel
         this.props.cableApp.room =
         this.props.cableApp.cable.subscriptions.create({
             channel: 'ChatroomChannel',
-            room: window.location.href.match(/\d+$/)[0]
+            room: this.props.currentRoom.id
         },
         
         {
 
             received: (updatedRoom) => {
+                console.log('The updatedroom we received is', updatedRoom)
                 this.props.updateApp(updatedRoom)
             }
 

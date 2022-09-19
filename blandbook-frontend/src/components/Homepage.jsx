@@ -58,6 +58,7 @@ class Homepage extends React.Component {
 
   getChatRoom = (room) => {
     // get the chat room id from 'all chat rooms' list
+    //room here is an object
     this.setState({
       room: room
     })
@@ -88,7 +89,7 @@ class Homepage extends React.Component {
   } //end getRoomData
 
 
-  updateAppStateRoom =  (newroom) => {
+  updateAppStateRoom =  (newroom) => { //newroom is anobject we get back from the ChatroomWebSocket after a message has been posted.
     this.setState({
       currentRoom:{
         chatroom: newroom.chatroom.data,
@@ -114,7 +115,7 @@ class Homepage extends React.Component {
               <Link to="#">{Icons.settings}</Link>
               <Link to="#">{Icons.home}</Link>
               <Link to="#">{Icons.account}</Link>
-              <Link to="/chatrooms/">{Icons.chat}</Link>
+              <Link to="#">{Icons.chat}</Link>
               <Link to="#">{Icons.groupChat}</Link>
               <Link to="#">{Icons.weather}</Link>
               <Link to="#">{Icons.calendar}</Link>
@@ -171,6 +172,7 @@ class Homepage extends React.Component {
                             getRoomData={this.getRoomData}
                             roomData={this.state.currentRoom}
                             currentUser={this.state.currentUser}
+                            currentRoom={this.state.room}
                           />
 
                       //   ) : (
