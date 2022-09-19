@@ -7,6 +7,7 @@ import React from 'react';
 import '../App.css';
 import '../css/first_row_info.css'
 import '../css/shows.css'
+import '../css/chat.css'
 
 // Components imports
 import ChatroomShow from './ChatroomShow';
@@ -19,13 +20,20 @@ import LoginMain from './LoginMain';
 import Login from './Login';
 
 
+
 class Homepage extends React.Component {
 
   state = {
     currentUser: null,
     query: null,
     error: null,
-    room: null
+    room: null,
+    allRooms: [],
+    currentRoom: {
+      chatroom: {},
+      users:[],
+      messages:[]
+    }
   }
 
   getCurrentUser = (userInfo) => {

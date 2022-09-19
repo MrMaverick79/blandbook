@@ -3,8 +3,8 @@ class ChatroomChannel < ApplicationCable::Channel
     
     # stream_from "some_channel"
     #this looks for a specific conversation that the user is 'subscribed to'
-    @chatrooom = Chatroom.find(params[:id])
-    #@chatrooom = Chatroom.find(3) #For testing
+    # @chatrooom = Chatroom.find(params[:id])
+    @chatrooom = Chatroom.find(3) #For testing
     stream_for @chatrooom
   end
 
