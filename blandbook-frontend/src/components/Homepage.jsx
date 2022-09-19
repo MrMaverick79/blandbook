@@ -62,7 +62,7 @@ class Homepage extends React.Component {
       room: room
     })
     console.log('clicked room:', room);
-    this.props.history.push(`/chatrooms/${room}/`);
+    
 
   }
 
@@ -114,7 +114,7 @@ class Homepage extends React.Component {
               <Link to="#">{Icons.settings}</Link>
               <Link to="#">{Icons.home}</Link>
               <Link to="#">{Icons.account}</Link>
-              <Link to="/chatrooms/:id">{Icons.chat}</Link>
+              <Link to="/chatrooms/">{Icons.chat}</Link>
               <Link to="#">{Icons.groupChat}</Link>
               <Link to="#">{Icons.weather}</Link>
               <Link to="#">{Icons.calendar}</Link>
@@ -162,20 +162,21 @@ class Homepage extends React.Component {
                     {this.state.room //ensure got the room id first
                       &&
                       // <ChatRoom classNames={'chatroom'} currentUser_id={this.state.currentUser.id} room={this.state.room} />
-                      <Route exact path ={`/chatrooms/${this.state.room}`} render={ (props) => {return this.state.currentUser ? 
-                        (<ChatroomShow 
-                            {...props}
+                      // <Route exact path ={`/chatrooms/${this.state.room}`} render={ (props) => {return this.state.currentUser ? 
+                        // (
+                        <ChatroomShow 
+                            //  
                             cableApp ={this.props.cableApp}
                             updateApp={this.updateAppStateRoom}
                             getRoomData={this.getRoomData}
                             roomData={this.state.currentRoom}
-                            currentUser-={this.state.currentUser}
+                            currentUser={this.state.currentUser}
                           />
 
-                        ) : (
-                          <Redirect to ='/' />
-                        )
-                      }} />
+                      //   ) : (
+                      //     <Redirect to ='/' />
+                      //   )
+                      // }} />
                         
 
                       
