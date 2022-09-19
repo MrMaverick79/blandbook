@@ -79,9 +79,10 @@ class ChatroomShow extends React.Component {
 
                     <form id='chat-form' onSubmit={this.submitMessage}>
                         <h3>Post a new message:</h3>
-                            <textarea type='text' value={this.state.newMessage} onChange={this.handleMessageInput}></textarea>
-                        <br></br>
-                        <input type='submit'></input>
+                           
+                            <textarea type='text' value={this.state.newMessage} onChange={this.handleMessageInput} id="chat_input" placeholder="Type your message here..."></textarea>
+                            <input type='submit' id="chat_button" value=""></input>
+                            
                     </form>
 
             {/* This invisible component is the core of the chat app. It contains the details of the cable through the WS */}
