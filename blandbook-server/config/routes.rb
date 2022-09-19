@@ -25,6 +25,8 @@ Rails.application.routes.draw do
   get '/users/last_user' => 'users#show'
   get '/users/:id/all_chat_rooms' => 'users#all_chat_rooms'
 
+  get '/users' => 'users#index'
+
   
 
   
