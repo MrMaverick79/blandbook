@@ -3,6 +3,7 @@ import './App.css';
 import { Route, HashRouter as Router, Link } from 'react-router-dom';
 
 import LoginMain from './components/LoginMain';
+import SignUpMain from './components/SignUpMain';
 
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
             {/* all Components here */}
 
             <LoginMain />
+            <SignUpMain />
             <div className='test'>DIV test</div>
           </main>
 
