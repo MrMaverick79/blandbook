@@ -2,12 +2,14 @@
 // Tools imports
 import { Route, HashRouter as Router, Link, Redirect } from 'react-router-dom';
 import React from 'react';
+import axios from 'axios';
 
 // CSS imports
 import '../App.css';
 import '../css/first_row_info.css'
 import '../css/shows.css'
 import '../css/chat.css'
+import '../css/posts.css'
 
 // Components imports
 import ChatroomShow from './ChatroomShow';
@@ -18,7 +20,7 @@ import AllChatRooms from './AllChatRooms';
 import ChatRoom from './ChatRoom';
 import LoginMain from './LoginMain';
 import Login from './Login';
-import axios from 'axios';
+import Posts from './Posts';
 
 
 
@@ -32,8 +34,8 @@ class Homepage extends React.Component {
     allRooms: [],
     currentRoom: {
       chatroom: {},
-      users:[],
-      messages:[]
+      users: [],
+      messages: []
     }
   }
 
@@ -53,7 +55,7 @@ class Homepage extends React.Component {
       query: query
     })
     console.log('Query from Search Form: ', query);
-    
+
   }
 
   getChatRoom = (room) => {
@@ -63,7 +65,7 @@ class Homepage extends React.Component {
       room: room
     })
     console.log('clicked room:', room);
-    
+
 
   }
 
@@ -71,13 +73,13 @@ class Homepage extends React.Component {
     console.log(this.state.currentUser);
   }
 
-  getRoomData = async( id ) => {
+  getRoomData = async (id) => {
 
 
     const res = await axios.get(`http://localhost:3000/chatrooms/${id}.json}`)
     console.log(res);
     this.setState({
-      currentRoom:{
+      currentRoom: {
         chatroom: res.data,
         users: res.data.users,
         messages: res.data.messages
@@ -89,9 +91,9 @@ class Homepage extends React.Component {
   } //end getRoomData
 
 
-  updateAppStateRoom =  (newroom) => { //newroom is anobject we get back from the ChatroomWebSocket after a message has been posted.
+  updateAppStateRoom = (newroom) => { //newroom is anobject we get back from the ChatroomWebSocket after a message has been posted.
     this.setState({
-      currentRoom:{
+      currentRoom: {
         chatroom: newroom.chatroom.data,
         users: newroom.users,
         messages: newroom.messages
@@ -164,32 +166,32 @@ class Homepage extends React.Component {
                       &&
                       // <ChatRoom classNames={'chatroom'} currentUser_id={this.state.currentUser.id} room={this.state.room} />
                       // <Route exact path ={`/chatrooms/${this.state.room}`} render={ (props) => {return this.state.currentUser ? 
-                        // (
-                        <ChatroomShow 
-                            //  
-                            cableApp ={this.props.cableApp}
-                            updateApp={this.updateAppStateRoom}
-                            getRoomData={this.getRoomData}
-                            roomData={this.state.currentRoom}
-                            currentUser={this.state.currentUser}
-                            currentRoom={this.state.room}
-                          />
+                      // (
+                      <ChatroomShow
+                        //  
+                        cableApp={this.props.cableApp}
+                        updateApp={this.updateAppStateRoom}
+                        getRoomData={this.getRoomData}
+                        roomData={this.state.currentRoom}
+                        currentUser={this.state.currentUser}
+                        currentRoom={this.state.room}
+                      />
 
                       //   ) : (
                       //     <Redirect to ='/' />
                       //   )
                       // }} />
-                        
 
-                      
+
+
                     }
                   </div>
+
                 }
 
 
-
                 <div className="post_container">
-                  Post Component Here
+                  <Posts classNames={'posts'} currentUser={this.state.currentUser} />
 
                 </div>
 
@@ -197,7 +199,7 @@ class Homepage extends React.Component {
 
 
               </div>
-              
+
 
 
             </main>
