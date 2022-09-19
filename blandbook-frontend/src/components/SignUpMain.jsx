@@ -1,3 +1,6 @@
+
+// need to refresh to get the data????
+
 import React from 'react'
 import axios from 'axios'
 import {Route, Link, HashRouter as Router} from 'react-router-dom';
@@ -51,10 +54,14 @@ class SignUpMain extends React.Component{
 
             console.log('setNewUser Response', res.data); // for test
 
+            localStorage.setItem("jwt", res.data.auth_token.token)
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + res.data.auth_token.token;
+
             this.setState({
-                newUser: res.data,
+                newUser: res.data.user,
                 // loading: false
             });
+
         } catch(err){
             this.setState({
                 // loading: false,

@@ -24,7 +24,11 @@ class UsersController < ApplicationController
       is_admin: params[:is_admin]
     )
     
-    render json: user
+    auth_token = Knock::AuthToken.new payload: {sub: user.id}
+    render json: {
+      user: user,
+      auth_token: auth_token
+    }
 
   end # create
 
