@@ -2,19 +2,32 @@ Rails.application.routes.draw do
 
   root to: 'pages#home'
 
-  resources :users, :chatrooms, :comments, :messages, :posts, :urls
+  get '/login' => 'session#new'
+  post '/login' => 'session#create'
+  delete '/login' => 'session#destroy'
 
+  resources :chatrooms, :comments, :messages, :posts, :urls
+
+  # all data in json file
   get '/alldata' => 'users#allData'
 
+  get '/users' => 'users#index'
+
+  post '/users' => 'users#create'
 
 
-  #these lines are needed for user authentication
-  #this one gets the login token from knock
+
+  # these lines are needed for user authentication
+  # this one gets the login token from knock
+  # do not put :users in resources
   post 'user_token' => 'user_token#create'
 
-  #this is the User route
+  # this is the User route
   get '/users/current' => 'users#current'
-
+  
+  # for the frontend test
+  get '/users/last_user' => 'users#show'
+  get '/users/:id/all_chat_rooms' => 'users#all_chat_rooms'
 
   
 

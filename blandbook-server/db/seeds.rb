@@ -254,8 +254,8 @@ cr3 = Chatroom.create!(
 )
 
 
-cr1.users << [u1, u2, u3]
-cr2.users << [u1, u3]
+cr1.users << [u1, u2, u3 ,u5]
+cr2.users << [u1, u3, u5]
 cr3.users << [u1, u2, u3, u4, u5]
 
 puts("Created #{Chatroom.count} Chatrooms")
