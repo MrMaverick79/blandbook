@@ -1,4 +1,7 @@
 class ChatroomsController < ApplicationController
+  
+  skip_before_action :verify_authenticity_token, raise: false
+  
   def new
     @chatroom = Chatroom.new
   end
@@ -12,12 +15,15 @@ class ChatroomsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json{render json: @chatrooms}
+      format.json{render json: @chatrooms, include: [:messages, :users]} ##Might not need this one here...might be too much information!
     end
   end
 
   def show
     @chatroom =  Chatroom.find params[:id]
+
+    render json: @chatroom, include: [:messages, :users]
+    
 
   end
 
