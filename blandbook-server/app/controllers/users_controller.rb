@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   # authenticate the user which will ensure only logged in users are able to access these methods
-  before_action :authenticate_user, except: [:index, :allData, :all_chat_rooms]
+  before_action :authenticate_user, except: [:index, :allData, :all_chat_rooms, :create]
   
   def current
     render json: current_user
@@ -24,9 +24,13 @@ class UsersController < ApplicationController
       is_admin: params[:is_admin]
     )
 
+
     if user.persisted?
-      # auth_token = Knock::AuthToken.new payload: { sub: user.id }
-      render json: user
+      auth_token = Knock::AuthToken.new payload: {sub: user.id}
+      render json: {
+        user: user,
+        auth_token: auth_token
+      }
     else
       # 'Unprocessable Entity', i.e. force an HTTP error code
       render json: {error: 'Could not create new user'}, status: 422

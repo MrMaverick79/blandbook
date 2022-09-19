@@ -21,6 +21,7 @@ import ChatRoom from './ChatRoom';
 import LoginMain from './LoginMain';
 import Login from './Login';
 import Posts from './Posts';
+import SignUpMain from './SignUpMain';
 
 
 
@@ -154,6 +155,12 @@ class Homepage extends React.Component {
                 {this.state.currentUser === null
                   &&
                   <LoginMain currentUser={this.getCurrentUser} />
+                }
+                <br />
+
+                {this.state.currentUser === null
+                  &&
+                  <SignUpMain />
                 }
 
 

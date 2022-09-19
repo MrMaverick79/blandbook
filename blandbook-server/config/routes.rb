@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 
   get '/users' => 'users#index'
 
+  post '/users' => 'users#create'
+
 
 
   # these lines are needed for user authentication

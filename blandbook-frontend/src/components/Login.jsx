@@ -35,7 +35,7 @@ class Login extends React.Component{
       //any further Axios requests for the current session of this app automatically send through the token in a header
       axios.defaults.headers.common['Authorization'] = 'Bearer ' + result.data.jwt;
       this.props.setCurrentUser();
-      this.props.history.push('/my_profile');
+      // this.props.history.push('/my_profile');
     })
     .catch(err => {
       console.warn(err)

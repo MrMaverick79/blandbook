@@ -40,6 +40,12 @@
 }
 
 .login_form{
-    width: 50%;
+    width: 25%;
     text-align: center;
 }
+
+.signup_form{
+    width: 25%;
+    text-align: center;
+}
+
