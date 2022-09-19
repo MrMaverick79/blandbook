@@ -11,7 +11,6 @@ class UsersController < ApplicationController
 
 
   def new
-    @user = User.new
   end
 
   def create
@@ -35,10 +34,13 @@ class UsersController < ApplicationController
 
   def all_chat_rooms
     # for frontend test
-    user = User.find params[:id]
-    rooms = user.chatrooms
-    render json:rooms
-  end
+    user = current_user
+    
+    if user.present?
+      rooms = user.chatrooms
+      render json:rooms
+    end
+end
 
   def edit
   end
