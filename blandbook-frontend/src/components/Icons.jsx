@@ -11,7 +11,8 @@ const Icons = {
     groupChat: iconGenerator('forum'),
     weather: iconGenerator('nest_farsight_weather'),
     calendar: iconGenerator('calendar_month'),
-    search:iconGenerator('search')
+    search:iconGenerator('search'),
+    logout:iconGenerator('logout')
 }
 
 

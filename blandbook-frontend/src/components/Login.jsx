@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import '../css/shows.css'
 
 const BASE_URL = 'http://localhost:3000'
 
@@ -45,7 +46,7 @@ class Login extends React.Component{
 
   render(){
     return(
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} >
 
         <label>Login Form</label>
         <br/>

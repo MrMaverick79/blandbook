@@ -2,40 +2,46 @@ import React from "react";
 import axios from "axios";
 
 
+
 class CurrentUserInfo extends React.Component {
 
     state = {
         // all data
         currentUser: null,
-        loading: true,
         error: null
     }
 
-    getCurrentUser = async (user_id) => {
-        const res = await axios.get(`http://localhost:3000/users/${user_id}`)
-
+    getCurrentUser = (user) => {
         this.setState({
-            currentUser: res.data,
-            loading: false,
-            // error:
-        })
+            currentUser: user
 
-        this.props.currentUser(res.data)
-        // pass the user info to parent 
+        })
     }
 
+    
+
+    handleLogout = () => {
+        this.setState({ currentUser: null })
+        localStorage.removeItem("jwt");
+        axios.defaults.headers.common['Authorization'] = undefined;
+        window.location.reload(false);
+    }
+
+
     componentDidMount() {
-        this.getCurrentUser(this.props.user_id)
+        this.getCurrentUser(this.props.user)
     }
 
     render() {
         return (
-            !this.state.loading
+            this.state.currentUser
             &&
             <div className={this.props.classNames}>
                 <img src={this.state.currentUser.avatar} alt={this.state.currentUser.screen_name} className='avatar' />
                 {' '}
                 Hi {this.state.currentUser.screen_name}
+                {' '}
+                <div className="material-symbols-outlined" onClick={this.handleLogout }>logout</div>
             </div>
         )
     }

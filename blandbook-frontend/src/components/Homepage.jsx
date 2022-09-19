@@ -15,6 +15,8 @@ import Icons from './Icons';
 import SearchForm from './SearchForm';
 import AllChatRooms from './AllChatRooms';
 import ChatRoom from './ChatRoom';
+import LoginMain from './LoginMain';
+import Login from './Login';
 
 
 class Homepage extends React.Component {
@@ -33,7 +35,7 @@ class Homepage extends React.Component {
       currentUser: userInfo,
       loading: false
     })
-    console.log(userInfo);
+    console.log(userInfo.id);
   }
 
   getQuery = (query) => {
@@ -52,6 +54,9 @@ class Homepage extends React.Component {
     console.log('clicked room:', room);
   }
 
+  componentDidMount() {
+    console.log(this.state.currentUser);
+  }
 
 
   render() {
@@ -79,13 +84,17 @@ class Homepage extends React.Component {
 
             <main>
               {/* all Components here */}
+
+
               <div className='first_row_info'>
 
                 <strong>Dashboard</strong>
 
                 <SearchForm classNames={'search_form'} query={this.getQuery} />
-
-                <CurrentUserInfo classNames={'user_info'} user_id={'last_user'} currentUser={this.getCurrentUser} />
+                {this.state.currentUser
+                  &&
+                  <CurrentUserInfo classNames={'user_info'} user={this.state.currentUser} />
+                }
                 {/* 
                   1. 'last_user' is for testing only, when app ready we can change to user.id. 
                   2. user's info got in this component and back to here by this.getCurrentUser, therefore, we can use this to share the current user info to other compoenet
@@ -94,32 +103,42 @@ class Homepage extends React.Component {
               </div>
               {/* end for first row info */}
 
-              {this.state.currentUser //ensure got the user info first
-                &&
-                <div className="container">
 
+
+
+
+              <div className="container">
+
+                {this.state.currentUser === null
+                  &&
+                  <LoginMain currentUser={this.getCurrentUser} />
+                }
+
+
+                {this.state.currentUser //ensure got the user info first
+                  &&
                   <div className="chat_container">
                     <AllChatRooms classNames={'all_chat_rooms'} currentUser_id={this.state.currentUser.id} clickedRoom={this.getChatRoom} />
 
                     {this.state.room //ensure got the room id first
-                    &&
-                    <ChatRoom classNames={'chatroom'} currentUser_id={this.state.currentUser.id} room={this.state.room} />
+                      &&
+                      <ChatRoom classNames={'chatroom'} currentUser_id={this.state.currentUser.id} room={this.state.room} />
                     }
                   </div>
-                  {/* end for chat */}
+                }
 
 
 
-                  <div className="post_container">
-                    Post Component Here
+                <div className="post_container">
+                  Post Component Here
 
-                  </div>
-
-
+                </div>
 
 
-                </div> // end for container
-              }
+
+
+              </div>
+              
 
 
             </main>
