@@ -71,7 +71,7 @@ class LoginMain extends React.Component{
                 <Route exact path='/my_profile' component={MyProfile}/>
                 <Route
                 exact path='/login'
-                render={(props) => <Login setCurrentUser={this.setCurrentUser}{...props}/>}
+                render={(props) => <Login setCurrentUser={this.setCurrentUser} {...props}/>}
                 />
             </div>
             </Router>
