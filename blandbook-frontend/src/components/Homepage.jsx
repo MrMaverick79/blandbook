@@ -64,7 +64,11 @@ class Homepage extends React.Component {
     //room here is an object
     this.setState({
       room: room
+      // currentRoom:{
+      //   chatroom: room
+      // }
     })
+    this.getRoomData(room.id)
     console.log('clicked room:', room);
 
 
@@ -72,33 +76,56 @@ class Homepage extends React.Component {
 
   componentDidMount() {
     console.log(this.state.currentUser);
+ 
+ 
+ 
+ 
+ 
   }
 
-  getRoomData = async (id) => {
+
+  getRoomData = (id) => {
 
 
-    const res = await axios.get(`http://localhost:3000/chatrooms/${id}.json}`)
-    console.log(res);
-    this.setState({
-      currentRoom: {
-        chatroom: res.data,
-        users: res.data.users,
-        messages: res.data.messages
-      } //end currentRoom
+    fetch(`http://localhost:3000/chatrooms/${id}.json`)
+    .then(response => response.json())
+    .then(result => {
+      console.log('The response from the chatroom fetch was ', result)
+      this.setState({
+        currentRoom: {
+          chatroom: result,
+          users: result.users,
+          messages: result.messages
+        }
+      })
     })
+
+    // const res = await axios.get(`http://localhost:3000/chatrooms/${id}.json}`)
+    // console.log(res);
+    // this.setState({
+    //   currentRoom: {
+    //     chatroom: res.data,
+    //     users: res.data.users,
+    //     messages: res.data.messages
+    //   } //end currentRoom
+    // })
 
 
 
   } //end getRoomData
 
 
-  updateAppStateRoom = (newroom) => { //newroom is anobject we get back from the ChatroomWebSocket after a message has been posted.
+  updateAppStateRoom = (newroom) => { //newroom is an object we get back from the ChatroomWebSocket after a message has been posted.
+    console.log('The new room recieved by udpateAppStateRoom is', newroom);
+    
     this.setState({
+      
       currentRoom: {
         chatroom: newroom.chatroom.data,
         users: newroom.users,
         messages: newroom.messages
       }
+    
     })
   }
 

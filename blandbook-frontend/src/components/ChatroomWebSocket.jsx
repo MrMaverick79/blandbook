@@ -6,7 +6,7 @@ class ChatroomWebSocket extends React.Component {
 
         //This is needed to render data on the ChatroomShow component. It grabs the room id_#, 
         this.props.getRoomData(this.props.currentRoom.id)
-        console.log('The ChatroomWebSocket has recieved room', this.props.roomData.chatroom.id);
+        console.log('The ChatroomWebSocket has recieved room', this.props.currentRoom.id);
         //the subscriptions.create() here is sending params to the subscribed action in the ChatroomsChannel
         this.props.cableApp.room =
         this.props.cableApp.cable.subscriptions.create({

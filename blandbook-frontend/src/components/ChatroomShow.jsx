@@ -11,6 +11,7 @@ class ChatroomShow extends React.Component {
         newMessage : ''
     }
 
+
     
 
     //This takes the content of the input field and adds it to the state as a new message

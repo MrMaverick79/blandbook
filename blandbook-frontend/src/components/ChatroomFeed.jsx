@@ -7,6 +7,11 @@ import ChatroomMessage from "./ChatroomMessage";
 
 class ChatroomFeed extends React.Component {
 
+   
+
+
+
+
     showMessages( allMessages ){
         console.log('ChatroomFeed has received the folowing messages', allMessages);
         return allMessages.map( message =>{
