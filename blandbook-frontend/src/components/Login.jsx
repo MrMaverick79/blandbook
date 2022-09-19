@@ -31,6 +31,7 @@ class Login extends React.Component{
     axios.post(`${BASE_URL}/user_token`, {auth: request})
     .then(result => {
       localStorage.setItem("jwt", result.data.jwt)
+      // console.log('Login jwt', result.data.jwt) // for test
       // Set axios default headers to have an authorization key.
       //any further Axios requests for the current session of this app automatically send through the token in a header
       axios.defaults.headers.common['Authorization'] = 'Bearer ' + result.data.jwt;

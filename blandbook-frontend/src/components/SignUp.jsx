@@ -35,7 +35,7 @@ class SignUp extends React.Component{
         ev.preventDefault();
         console.log('SignUp', this.state); // for test
         this.props.notifySignUp(this.state);
-        this.props.history.push('/')
+        this.props.history.push('/my_profile');
     }
 
     render(){
