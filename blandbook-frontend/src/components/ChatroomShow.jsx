@@ -29,19 +29,21 @@ class ChatroomShow extends React.Component {
         })
    
         //Define the message to match the model created in Rails. Might need to add some more details here to enable the other features in message (such as likes or dislikes).
-
+        console.log('The content of userId is', this.props.currentUser.id);
+        
         const message = {
-
+            
             content: this.state.newMessage,
             user_id: this.props.currentUser.id,
             chatroom_id: this.props.roomData.chatroom.id
 
         }
+        
 
         //post a message to the server using another axios rquest
-        const res = await axios.post("http://localhost:3000/messages",message
+        const res = await axios.post("http://localhost:3000/messages", message
         )
-        console.log(res.data)
+        console.log('This is ftaer the message post', res.data)
 
    
     }
