@@ -1,0 +1,8 @@
+.posts li{
+    list-style: none;
+  }
+
+  .posts button{
+    border: none;
+    cursor: pointer;
+  }

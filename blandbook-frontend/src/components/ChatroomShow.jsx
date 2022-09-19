@@ -40,19 +40,40 @@ class ChatroomShow extends React.Component {
         }
         
 
-        //post a message to the server using another axios rquest
-        const res = await axios.post("http://localhost:3000/messages", message
-        )
-        console.log('This is ftaer the message post', res.data)
+        // //post a message to the server using another axios rquest
+        //  const res = await axios.post("http://localhost:3000/messages", message
+        // )
+        // console.log('This is after the message post', res.data)
+
+        fetch("http://localhost:3000/messages", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json"
+            },
+            body: JSON.stringify({message: message})
+        })
+        .then(resp => resp.json())
+        // .then(result => {
+        //     let messageDiv = document.getElementById('messages')
+        //     messageDiv.scrollTop = messageDiv.scrollHeight
+        // })
+    }
 
    
-    }
+    
 
     //Map over the members of the chat to show them in the sidebar
     showMembers = ( membersList ) => {
-        return membersList.map( member =>{
-            return <li><img src={member.avatar} id="chat_avatar"/>{member.screen_name} </li>
-        })
+        if(membersList.length > 0){ //this was to avoid an error
+
+            console.log('This is members list', membersList);
+            return membersList.map( member =>{
+                return <li><img src={member.avatar} id="chat_avatar"/>{member.screen_name} </li>
+            })
+
+
+        }
     }
 
 
@@ -90,6 +111,7 @@ class ChatroomShow extends React.Component {
                     updateApp={this.props.updateApp}
                     getRoomData={this.props.getRoomData}
                     roomData={this.props.roomData}
+                    currentRoom={this.props.currentRoom}
                 />
 
 
