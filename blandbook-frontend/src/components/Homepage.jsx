@@ -18,6 +18,7 @@ import AllChatRooms from './AllChatRooms';
 import ChatRoom from './ChatRoom';
 import LoginMain from './LoginMain';
 import Login from './Login';
+import axios from 'axios';
 
 
 
@@ -66,6 +67,33 @@ class Homepage extends React.Component {
     console.log(this.state.currentUser);
   }
 
+  getRoomData = async( id ) => {
+
+
+    const res = await axios.get(`http://localhost:3000/chatrooms/${id}.json}`)
+    console.log(res);
+    this.setState({
+      currentRoom:{
+        chatroom: res.data,
+        users: res.data.users,
+        messages: res.data.messages
+      } //end currentRoom
+    })
+
+
+
+  } //end getRoomData
+
+
+  updateAppStateRoom =  (newroom) => {
+    this.setState({
+      currentRoom:{
+        chatroom: newroom.chatroom.data,
+        users: newroom.users,
+        messages: newroom.messages
+      }
+    })
+  }
 
   render() {
     return (
@@ -130,7 +158,24 @@ class Homepage extends React.Component {
 
                     {this.state.room //ensure got the room id first
                       &&
-                      <ChatRoom classNames={'chatroom'} currentUser_id={this.state.currentUser.id} room={this.state.room} />
+                      // <ChatRoom classNames={'chatroom'} currentUser_id={this.state.currentUser.id} room={this.state.room} />
+                      <Route exact path ={`/chatrooms/${this.state.room.id}`} render={ (props) => {return this.state.currentUser ? 
+                        (<ChatroomShow 
+                            {...props}
+                            cableApp ={this.props.cableApp}
+                            updateApp={this.updateAppStateRoom}
+                            getRoomData={this.getRoomData}
+                            roomData={this.state.currentRoom}
+                            currentUser-={this.state.currentUser}
+                          />
+
+                        ): (
+                          <Redirect to ='/' />
+                        )
+                      }} />
+                        
+
+                      
                     }
                   </div>
                 }

@@ -48,7 +48,7 @@
 
   #chat_button {
     position: relative;
-    background-image: url('../public/pictures/arrow.png');
+    background-image: url('../../public/pictures/arrow.png');
     background-size: cover;
     left: -10%;
     top: -3vh;

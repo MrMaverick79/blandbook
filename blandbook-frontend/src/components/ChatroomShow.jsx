@@ -1,6 +1,6 @@
 import axios from "axios";
 import React from "react";
-import '../../src/Chat.css';
+import '../css/chat.css';
 import ChatroomWebSocket from "./ChatroomWebSocket";
 import ChatroomFeed from "./ChatroomFeed";
 
