@@ -62,13 +62,12 @@ class Homepage extends React.Component {
   getChatRoom = (room) => {
     // get the chat room id from 'all chat rooms' list
     //room here is an object
+    this.getRoomData(room.id)  //I'm not sure if this is needed
     this.setState({
       room: room
-      // currentRoom:{
-      //   chatroom: room
-      // }
+      
     })
-    this.getRoomData(room.id)
+    
     console.log('clicked room:', room);
 
 
@@ -117,16 +116,18 @@ class Homepage extends React.Component {
 
   updateAppStateRoom = (newroom) => { //newroom is an object we get back from the ChatroomWebSocket after a message has been posted.
     console.log('The new room recieved by udpateAppStateRoom is', newroom);
-    
-    this.setState({
+    this.getRoomData(newroom.chatroom.data.id)
+
+   this.setState({
       
-      currentRoom: {
+      currentRoom:{
         chatroom: newroom.chatroom.data,
         users: newroom.users,
         messages: newroom.messages
       }
     
     })
+    
   }
 
   render() {
