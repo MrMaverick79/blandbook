@@ -7,17 +7,41 @@ import ChatroomMessage from "./ChatroomMessage";
 
 class ChatroomFeed extends React.Component {
 
-   
+    state={
+        loading: null,
+    }
 
-
-
-
+    
     showMessages( allMessages ){
         
         return allMessages.map( message =>{
-            return <ChatroomMessage key={message.id} message={message} senderId={message.user_id} userId={this.props.user} />
+            console.log(message);
+            return <ChatroomMessage key={message.id} message={message.content} senderId={message.user_id} userId={this.props.user} />
         })
     }
+    
+   
+    // }
+    // showAllMessages = (messageList) =>{
+    //     console.log('We are in showAllMessages', messageList);
+    //     // return messageList.map( message =>{
+    //     //     return {message} />
+    //     const elements = []
+    //     Object.entries(messageList).forEach(
+    //         ([key, value]) => {
+    //            console.log('Just checking', value.content);
+    //            elements.push(<p>{value.content}</p>)
+               
+              
+            
+    //         })
+      
+    //     return elements.map( message =>{
+    //             return <ChatroomMessage  message={message} />
+    //     });
+        
+    //     // })
+    // }
 
     render(){
 
@@ -28,9 +52,9 @@ class ChatroomFeed extends React.Component {
 
                 <div className="messages">
                 { 
-                    this.props.chatroom.messages 
+                    this.props.chatroom.messages
                     ? 
-                    (this.showMessages(this.props.chatroom.messages)) 
+                    (this.showMessages(this.props.chatroom.messages))
                     :
                     (<h3>Be the first to post!</h3>) 
                 }
