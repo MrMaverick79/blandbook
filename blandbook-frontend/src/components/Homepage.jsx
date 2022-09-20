@@ -18,12 +18,11 @@ import Icons from './Icons';
 import SearchForm from './SearchForm';
 import AllChatRooms from './AllChatRooms';
 import ChatRoom from './ChatRoom';
-import LoginMain from './LoginMain';
 import Login from './Login';
 import Posts from './Posts';
 import SignUpMain from './SignUpMain';
 
-
+const BASE_URL = 'http://localhost:3000'
 
 class Homepage extends React.Component {
 
@@ -76,6 +75,9 @@ class Homepage extends React.Component {
 
   componentDidMount() {
     console.log(this.state.currentUser);
+
+    // want to check if the user is logged in when we visit
+    this.setCurrentUser();
  
  
  
@@ -129,6 +131,28 @@ class Homepage extends React.Component {
     })
   }
 
+    // This is a function to get the current user from your database if there is one.
+    // a token which holds a json web token 'jwt' from your local storage. (set this on the login page and signup main component)
+    // pass through this token as an auth header which will let our server validate us
+    setCurrentUser = () => {
+      const jwt = localStorage.getItem("jwt"); // "jwt" comes from login component or signupmain component
+
+      if (jwt === null) {
+        return; //early return when user not log in
+      }
+
+      let token = "Bearer " + jwt;
+      axios.defaults.headers.common['Authorization'] = token;
+      axios.get(`${BASE_URL}/users/current`)
+      .then(res => {
+        this.setState({currentUser: res.data})
+      //   console.log('LoginMain', res.data) // for test
+      })
+      .catch(err => console.warn(err))
+    }
+
+
+    
   render() {
     return (
 
@@ -181,13 +205,13 @@ class Homepage extends React.Component {
 
                 {this.state.currentUser === null
                   &&
-                  <LoginMain currentUser={this.getCurrentUser} />
+                  <Login setCurrentUserLogin={this.setCurrentUser} />
                 }
                 <br />
 
                 {this.state.currentUser === null
                   &&
-                  <SignUpMain />
+                  <SignUpMain setCurrentUserSignup={this.setCurrentUser}/>
                 }
 
 
