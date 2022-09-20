@@ -22,6 +22,7 @@ import LoginMain from './LoginMain';
 import Login from './Login';
 import Posts from './Posts';
 import SignUpMain from './SignUpMain';
+import FriendsList from './FriendsList';
 
 
 
@@ -62,13 +63,12 @@ class Homepage extends React.Component {
   getChatRoom = (room) => {
     // get the chat room id from 'all chat rooms' list
     //room here is an object
+    this.getRoomData(room.id)  //I'm not sure if this is needed
     this.setState({
       room: room
-      // currentRoom:{
-      //   chatroom: room
-      // }
+      
     })
-    this.getRoomData(room.id)
+    
     console.log('clicked room:', room);
 
 
@@ -183,6 +183,8 @@ class Homepage extends React.Component {
                   <div className="chat_container">
                     <AllChatRooms classNames={'all_chat_rooms'} currentUser_id={this.state.currentUser.id} clickedRoom={this.getChatRoom} />
 
+                  
+
                     {this.state.room //ensure got the room id first
                       &&
                       // <ChatRoom classNames={'chatroom'} currentUser_id={this.state.currentUser.id} room={this.state.room} />
@@ -208,8 +210,17 @@ class Homepage extends React.Component {
                     }
                   </div>
 
+                  
+
                 }
 
+                {this.state.currentUser
+                  &&
+                  <div className="friendsList">
+                    <FriendsList currentUser={this.state.currentUser}/>
+                  </div>
+                
+                }
 
                 <div className="post_container">
                   <Posts classNames={'posts'} currentUser={this.state.currentUser} />
