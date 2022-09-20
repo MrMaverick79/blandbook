@@ -6,6 +6,7 @@ class SignUp extends React.Component{
         email: '',
         screen_name: '',
         password: '',
+        password_confirmation: '',
         avatar: '',
         location: '',
         is_admin: false // when a user sign up, make it always not admin??
@@ -22,6 +23,9 @@ class SignUp extends React.Component{
                 break;
             case 'password':
                 this.setState({password: ev.target.value})
+                break;
+            case 'password_confirmation':
+                this.setState({password_confirmation: ev.target.value})
                 break;
             case 'avatar':
                 this.setState({avatar: ev.target.value})
@@ -65,6 +69,14 @@ class SignUp extends React.Component{
                 name="password"
                 type="password" 
                 placeholder='Enter Password'
+                />
+                <br />
+
+                <input 
+                onChange={this.handleInput}
+                name="password_confirmation"
+                type="password" 
+                placeholder='Enter Password Again'
                 />
                 <br />
 
