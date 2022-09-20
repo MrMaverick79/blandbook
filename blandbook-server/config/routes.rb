@@ -10,8 +10,10 @@ Rails.application.routes.draw do
 
   # all data in json file
   get '/alldata' => 'users#allData'
-
+  #to display followers and following
+  get '/friends/:id' => 'users#friends'
   get '/users' => 'users#index'
+
 
   post '/users' => 'users#create'
 

@@ -60,6 +60,13 @@ class UsersController < ApplicationController
     render json:user
   end
 
+  def friends
+    @user = User.find params[:id]    
+    render json: @user, include: [:posts, :chatrooms, :comments, :messages, :urls, :following, :followers]
+
+  end
+  
+
   def all_chat_rooms
     # for frontend test
     user = current_user
@@ -84,7 +91,7 @@ end
 
     respond_to do |format|
       format.html
-      format.json{render json: @users, include: [:posts, :chatrooms, :comments, :messages, :urls]}
+      format.json{render json: @users, include: [:posts, :chatrooms, :comments, :messages, :urls, :following, :followers]}
     end
   end
 
