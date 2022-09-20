@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 
 import Comments from "./Comments";
+import CreatePost from "./CreatePost";
 
 
 
@@ -19,6 +20,7 @@ class Posts extends React.Component {
             postsArr: res.data.reverse(),
         })
     }
+
 
     handleClick = async (post_id, numb, index, fc) => {
 
@@ -60,6 +62,25 @@ class Posts extends React.Component {
 
     }
 
+    updateRenderData = (post_id) =>{
+
+        let newArr = []
+
+        this.state.postsArr.forEach(post=>{
+            if (post.id !== post_id) {
+                newArr.push(post)
+            }
+        })
+
+        this.setState({
+            postsArr: newArr
+        })
+    }
+
+    handleDelete = async(id) =>{
+        const res = await axios.delete(`http://localhost:3000/posts/${id}`)
+        this.updateRenderData(id)
+    }
 
 
     componentDidMount() {
@@ -71,6 +92,8 @@ class Posts extends React.Component {
         return (
             this.state.postsArr &&
             <ul className={this.props.classNames}>
+                <CreatePost currentUser = {this.props.currentUser} updateData = {this.getPosts}/>
+                <hr />
                 {this.state.postsArr.map((post, index) =>
                     <li key={post.id}>
                         <p>{post.title}</p>
@@ -79,10 +102,11 @@ class Posts extends React.Component {
                         <p>created by:{post.user.screen_name}</p>
 
                         < Comments singlePost={post} />
-
+                        <button onClick={()=>this.handleDelete(post.id)}>Delete</button>
                         <br />
+                        <hr />
                     </li>)}
-
+                    
             </ul>
         )
     }
