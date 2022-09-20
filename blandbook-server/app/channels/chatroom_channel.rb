@@ -15,10 +15,10 @@ class ChatroomChannel < ApplicationCable::Channel
     
   
     
-    Message.create content: data["content"], user_id: data["user_id"], chatroom_id: data["chatroom_id"]
+    @message = Message.create content: data["content"], user_id: data["user_id"], chatroom_id: data["chatroom_id"]
 
 
-    ChatroomChannel.broadcast_to("room_#{params[:room]}", data)
+    ChatroomChannel.broadcast_to("room_#{params[:room]}", @message)
     
 
   end
