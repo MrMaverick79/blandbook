@@ -8,6 +8,7 @@ import ChatroomFeed from "./ChatroomFeed";
 class ChatroomShow extends React.Component {
 
     state = {
+        allMessages : [],
         newMessage : '',
         roomSubscription: null
 
@@ -28,6 +29,10 @@ class ChatroomShow extends React.Component {
         })
     }
 
+    postMessage (messageObject){
+        const res = axios.post("http://localhost:3000/messages/", messageObject)
+    }
+
     //After submission, clear the state so a new message can be added. Also prevent the submit button from refreshing the page
     submitMessage = async ( e ) => {
         e.preventDefault()
@@ -42,8 +47,8 @@ class ChatroomShow extends React.Component {
         const message = {
             
             content: this.state.newMessage,
-            // user_id: this.props.currentUser.id,
-            // chatroom_id: this.props.roomData.chatroom.id
+            user_id: this.props.currentUser.id,
+            chatroom_id: this.props.roomData.chatroom.id
 
         }
         
@@ -66,19 +71,30 @@ class ChatroomShow extends React.Component {
         //     let messageDiv = document.getElementById('messages')
         //     messageDiv.scrollTop = messageDiv.scrollHeight
         // })
+
+        //This actually sends the message to the backend
         if (this.state.roomSubscription !== null){
 
             this.state.roomSubscription.send(message)
 
         }
         
-
+        // this.postMessage(message)
     }
 
 
     updateAppStateRoom = (message) => { //newroom is an object we get back from the ChatroomWebSocket after a message has been posted.
-        console.log('The new room recieved by udpateAppStateRoom is', message);
+        console.log('The new message recieved by updateAppStateRoom is', message);
+        const newMessageList = [{...this.props.roomData.messages, message}]
+        console.log("new message object is", newMessageList);
+        this.setState({
+            allMessages: newMessageList
+        }) 
+
+       
         
+        
+
         // this.setState({
           
         // //   currentRoom: {
@@ -126,7 +142,7 @@ class ChatroomShow extends React.Component {
 
                     </div>
                     
-                    <ChatroomFeed chatroom={this.props.roomData.chatroom} user={this.props.currentUser}/>
+                    <ChatroomFeed chatroom={this.props.roomData.chatroom} messages={this.props.roomData.messages.content} allMessages={this.state.allMessages} user={this.props.currentUser}/>
 
                     <form id='chat-form' onSubmit={this.submitMessage}>
                         <h3>Post a new message:</h3>

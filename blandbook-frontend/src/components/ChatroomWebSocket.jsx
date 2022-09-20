@@ -19,10 +19,11 @@ class ChatroomWebSocket extends React.Component {
             received: (updatedRoom) => {
                 console.log('The updatedroom we received is', updatedRoom)
                 this.props.updateApp(updatedRoom)
+                //This contains chatroom_id: , content: , user_id:
             }
 
         });
-
+        //Room here is just the room number
         this.props.onSubscriptionCreate(room)
 
 

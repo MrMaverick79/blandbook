@@ -12,7 +12,15 @@ class ChatroomChannel < ApplicationCable::Channel
   end
 
   def receive(data)
+    
+  
+    
+    Message.create content: data["content"], user_id: data["user_id"], chatroom_id: data["chatroom_id"]
+
+
     ChatroomChannel.broadcast_to("room_#{params[:room]}", data)
+    
+
   end
 
   def unsubscribed
