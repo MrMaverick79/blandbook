@@ -1,0 +1,11 @@
+
+
+.friendAvatar {
+    width: 30px;
+    border-radius: 50%;
+}
+
+.friendList {
+    list-style: none;
+}
+

@@ -14,6 +14,21 @@ class ChatroomShow extends React.Component {
 
     }
 
+    componentDidMount(){
+        if(this.props.roomData.messages){
+            this.setState({
+                allMessages: this.props.roomData.messages
+            })
+    
+
+        } else{
+            return   
+        }
+       
+
+    }
+    
+
 
     onSubscriptionCreate = ( sub ) => {
         console.log('Here is sub from oSC', sub);
@@ -78,18 +93,37 @@ class ChatroomShow extends React.Component {
             this.state.roomSubscription.send(message)
 
         }
+
+        
+
+       
         
         // this.postMessage(message)
     }
 
 
     updateAppStateRoom = (message) => { //newroom is an object we get back from the ChatroomWebSocket after a message has been posted.
-        console.log('The new message recieved by updateAppStateRoom is', message);
-        const newMessageList = [{...this.props.roomData.messages, message}]
-        console.log("new message object is", newMessageList);
+
+        //we just need to add this to the props.data.messages
+        //We could make this.state.allMEssages correspond to that
+        //And then use that iun the feed?
+        console.log('The new message recieved by updateAppStateRoom is', message); //this is a new data object
+        // // const newMessageList = [{...this.props.roomData.messages},{message}]
+        // console.log("new message object is", newMessageList);
+        // this.setState({
+        //     allMessages: newMessageList
+        // }) 
         this.setState({
-            allMessages: newMessageList
-        }) 
+            allMessages: [message,...this.state.allMessages]
+        })
+
+        console.log('After the updtate, the state is', this.state.allMessages);
+
+
+
+
+
+
 
        
         

@@ -19,7 +19,7 @@ import CurrentUserInfo from './CurrentUserInfo';
 import Icons from './Icons';
 import SearchForm from './SearchForm';
 import AllChatRooms from './AllChatRooms';
-import ChatRoom from './ChatRoom';
+
 import Login from './Login';
 import Posts from './Posts';
 import SignUpMain from './SignUpMain';
@@ -47,6 +47,7 @@ class Homepage extends React.Component {
   getCurrentUser = (userInfo) => {
     // get the current info.(from CurrentUserInfo component) 
     // we can use this function to share current user info
+    
     this.setState({
       currentUser: userInfo,
       loading: false

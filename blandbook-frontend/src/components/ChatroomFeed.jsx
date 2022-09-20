@@ -10,12 +10,30 @@ class ChatroomFeed extends React.Component {
     state={
         loading: null,
     }
+    componentDidMount(){
+        if(this.props.chatroom.allMessages){
+            this.showMessages(this.props.allMessages)
+        }else{
+            console.log('Loading');
+        }
 
+
+    }
+
+    componentDidUpdate(prevProps){
+        if(this.props.chatroom.allMessages !== prevProps.chatroom.allMessages){
+            this.showMessages(this.props.allMessages)
+        }else{
+            console.log('Loading');
+        }
+
+        
+    }
     
     showMessages( allMessages ){
         
         return allMessages.map( message =>{
-            console.log(message);
+           
             return <ChatroomMessage key={message.id} message={message.content} senderId={message.user_id} userId={this.props.user} />
         })
     }
@@ -54,7 +72,7 @@ class ChatroomFeed extends React.Component {
                 { 
                     this.props.chatroom.messages
                     ? 
-                    (this.showMessages(this.props.chatroom.messages))
+                    (this.showMessages(this.props.allMessages))
                     :
                     (<h3>Be the first to post!</h3>) 
                 }
