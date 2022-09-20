@@ -1,5 +1,6 @@
 
 import React from "react";
+import axios from "axios";
 
 
 class SearchForm extends React.Component {
@@ -8,8 +9,14 @@ class SearchForm extends React.Component {
         query:null
     }
 
-    handleSubmit = () =>{
-        this.props.query(this.state.query)
+
+    handleSubmit = async () =>{
+        // this.props.results(this.state.results) 
+        // this.props.results(this.state.query) // test only
+        
+        const res = await axios.get(`http://localhost:3000/search/${this.state.query}`)
+
+        this.props.results(res.data) 
     }
 
     handleInput = (e) => {
@@ -22,7 +29,7 @@ class SearchForm extends React.Component {
         return (
 
             <form className={this.props.classNames} onSubmit={this.handleSubmit}>
-                <input type="text" placeholder="Search Here" onChange={this.handleInput}/>
+                <input type="text" placeholder="Search for Posts or Users" onChange={this.handleInput}/>
                 <input type='submit' className="material-symbols-outlined" value='search' />
             </form>
         )
