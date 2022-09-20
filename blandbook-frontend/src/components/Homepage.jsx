@@ -115,20 +115,7 @@ class Homepage extends React.Component {
   } //end getRoomData
 
 
-  updateAppStateRoom = (newroom) => { //newroom is an object we get back from the ChatroomWebSocket after a message has been posted.
-    console.log('The new room recieved by udpateAppStateRoom is', newroom);
-    
-    this.setState({
-      
-      currentRoom: {
-        chatroom: newroom.chatroom.data,
-        users: newroom.users,
-        messages: newroom.messages
-      }
-    
-    })
-  }
-
+  
   render() {
     return (
 

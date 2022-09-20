@@ -13,7 +13,7 @@ class ChatroomFeed extends React.Component {
 
 
     showMessages( allMessages ){
-        console.log('ChatroomFeed has received the folowing messages', allMessages);
+        
         return allMessages.map( message =>{
             return <ChatroomMessage key={message.id} message={message} senderId={message.user_id} userId={this.props.user} />
         })
