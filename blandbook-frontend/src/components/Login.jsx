@@ -33,9 +33,8 @@ class Login extends React.Component{
       localStorage.setItem("jwt", result.data.jwt)
       // Set axios default headers to have an authorization key.
       //any further Axios requests for the current session of this app automatically send through the token in a header
-      axios.defaults.headers.common['Authorization'] = 'Bearer ' + result.data.jwt;
-      this.props.setCurrentUser();
-      this.props.history.push('/my_profile');
+      // axios.defaults.headers.common['Authorization'] = 'Bearer ' + result.data.jwt;
+      this.props.setCurrentUserLogin();
     })
     .catch(err => {
       console.warn(err)

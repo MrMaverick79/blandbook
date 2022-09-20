@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   # authenticate the user which will ensure only logged in users are able to access these methods
-  before_action :authenticate_user, except: [:index, :allData]
+  before_action :authenticate_user, except: [:index, :allData, :all_chat_rooms, :create]
   
   def current
     render json: current_user
@@ -14,8 +14,36 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.create email: params[:email]
-  end
+
+    user = User.create(
+      email: params[:email],
+      screen_name: params[:screen_name],
+      password: params[:password],
+      password_confirmation: params[:password_confirmation],
+      avatar: params[:avatar],
+      location: params[:location],
+      is_admin: params[:is_admin]
+    )
+
+
+    if user.errors.any?
+      render json: {error: user.errors.full_messages}, status: 422
+
+    else
+
+      if user.persisted?
+        auth_token = Knock::AuthToken.new payload: {sub: user.id}
+        render json: {
+          user: user,
+          auth_token: auth_token
+        }
+      else
+        # 'Unprocessable Entity', i.e. force an HTTP error code
+        render json: {error: 'Could not create new user'}, status: 422
+      end
+    end
+    
+  end # create
 
   def index
     @users = User.all
@@ -24,7 +52,7 @@ class UsersController < ApplicationController
       format.html
       format.json{render json: @users}
     end
-  end
+  end # index
 
   def show
     # for frontend test
@@ -64,6 +92,7 @@ end
   
   def user_params
     params.require(:user).permit(:screen_name, :email, :password, :password_confirmation, :avatar, :location, :is_admin )
-  end
+  end # user_params
+
    
 end # class UsersController

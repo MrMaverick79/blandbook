@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 
   get '/users' => 'users#index'
 
+  post '/users' => 'users#create'
+
 
 
   # these lines are needed for user authentication
@@ -26,6 +28,8 @@ Rails.application.routes.draw do
   # for the frontend test
   get '/users/last_user' => 'users#show'
   get '/users/:id/all_chat_rooms' => 'users#all_chat_rooms'
+
+  get '/search/:keyword' => 'posts#search'
 
   
 
