@@ -10,6 +10,7 @@ import '../css/first_row_info.css'
 import '../css/shows.css'
 import '../css/chat.css'
 import '../css/posts.css'
+import '../css/search.css'
 
 // Components imports
 import ChatroomShow from './ChatroomShow';
@@ -22,6 +23,7 @@ import LoginMain from './LoginMain';
 import Login from './Login';
 import Posts from './Posts';
 import SignUpMain from './SignUpMain';
+import SearchResults from './SearchResults';
 
 
 
@@ -29,7 +31,7 @@ class Homepage extends React.Component {
 
   state = {
     currentUser: null,
-    query: null,
+    queryResults: null,
     error: null,
     room: null,
     allRooms: [],
@@ -50,12 +52,12 @@ class Homepage extends React.Component {
     console.log(userInfo.id);
   }
 
-  getQuery = (query) => {
+  getQueryResults = (resutls) => {
     // get the query words from search form
     this.setState({
-      query: query
+      queryResults: resutls
     })
-    console.log('Query from Search Form: ', query);
+    console.log('Query from Search Form: ', resutls);
 
   }
 
@@ -75,10 +77,7 @@ class Homepage extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.state.currentUser);
- 
- 
- 
+    console.log(this.state.currentUser)
  
  
   }
@@ -160,7 +159,8 @@ class Homepage extends React.Component {
 
                 <strong>Dashboard</strong>
 
-                <SearchForm classNames={'search_form'} query={this.getQuery} />
+                <SearchForm classNames={'search_form'} results={this.getQueryResults} />
+
                 {this.state.currentUser
                   &&
                   <CurrentUserInfo classNames={'user_info'} user={this.state.currentUser} />
@@ -173,7 +173,16 @@ class Homepage extends React.Component {
               </div>
               {/* end for first row info */}
 
-
+                {this.state.queryResults &&
+            
+                  <SearchResults  results={this.state.queryResults} classNames={'search_results'} close={()=>{
+                    this.setState({
+                      queryResults:null
+                      // close the search results
+                    })
+                  }}/>
+                }
+                {/* For search results show */}
 
 
 

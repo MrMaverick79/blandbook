@@ -66,7 +66,7 @@ class Posts extends React.Component {
     render() {
         return (
             this.state.postsArr &&
-            <div className={this.props.classNames}>
+            <ul className={this.props.classNames}>
                 {this.state.postsArr.map((post, index) =>
                     <li key={post.id}>
                         <p>{post.title}</p>
@@ -75,7 +75,7 @@ class Posts extends React.Component {
                         <p>created by:{post.user.screen_name}</p>
                     </li>)}
 
-            </div>
+            </ul>
         )
     }
 
