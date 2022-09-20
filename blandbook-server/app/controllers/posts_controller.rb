@@ -8,8 +8,9 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all
     @comments = Comment.all
+    @posts = Post.all.order("created_at DESC")
+ 
 
     # posts include user & comment
     # comments include its user
@@ -41,6 +42,15 @@ class PostsController < ApplicationController
   def destroy
     Post.destroy params[:id]
   end
+
+  def search
+    keyword = params[:keyword]
+    rlts_post = Post.where("title ilike ?","%#{keyword}%")
+    rlts_user = User.where("screen_name ilike ?","%#{keyword}%")
+    rlts = rlts_post + rlts_user
+    render json: rlts
+  end
+
 
   private
 
