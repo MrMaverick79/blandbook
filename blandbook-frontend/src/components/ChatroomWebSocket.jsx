@@ -8,7 +8,7 @@ class ChatroomWebSocket extends React.Component {
         this.props.getRoomData(this.props.currentRoom.id)
         console.log('The ChatroomWebSocket has recieved room', this.props.currentRoom.id);
         //the subscriptions.create() here is sending params to the subscribed action in the ChatroomsChannel
-        this.props.cableApp.room =
+        const room =
         this.props.cableApp.cable.subscriptions.create({
             channel: 'ChatroomChannel',
             room: this.props.currentRoom.id
@@ -21,7 +21,11 @@ class ChatroomWebSocket extends React.Component {
                 this.props.updateApp(updatedRoom)
             }
 
-        })
+        });
+
+        this.props.onSubscriptionCreate(room)
+
+
 
 
  
