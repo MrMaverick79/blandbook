@@ -18,9 +18,9 @@ class ChatroomMessage extends React.Component{
     render(){
 
         return(
-
+            
             <div id="chat_message" className={this.whichUser(this.props.senderId )}>
-                    <p>{this.props.message.content}</p>
+                    <p>{this.props.message}</p>
 
             </div>
 
