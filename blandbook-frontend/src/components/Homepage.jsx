@@ -3,6 +3,7 @@
 import { Route, HashRouter as Router, Link, Redirect } from 'react-router-dom';
 import React from 'react';
 import axios from 'axios';
+import { Switch } from "react-router";
 
 // CSS imports
 import '../App.css';
@@ -24,6 +25,7 @@ import Posts from './Posts';
 import SignUpMain from './SignUpMain';
 import SearchResults from './SearchResults';
 import FriendsList from './FriendsList';
+import Comments from "./Comments";
 
 const BASE_URL = 'http://localhost:3000'
 
@@ -272,16 +274,25 @@ class Homepage extends React.Component {
                 }
 
                 <div className="post_container">
-                  <Posts classNames={'posts'} currentUser={this.state.currentUser} />
+                  <Switch>
+                    {/* <Posts classNames={'posts'} currentUser={this.state.currentUser} />
+                     */}
 
+                     <Route exact path="/">
+                     <Posts classNames={'posts'} currentUser={this.state.currentUser} />
+                     </Route>
+
+                     <Route exact path="/comments/:postId" render={(props) => <Comments currentUser={this.state.currentUser} {...props}/>}/>
+                     
+                </Switch>
                 </div>
-
-
 
 
               </div>
 
 
+              {/* components */}
+              
 
             </main>
           </div>

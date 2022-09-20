@@ -7,11 +7,25 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @comment = Comment.create comment_params
-  end
+    comment = Comment.create(
+      content: params[:content],
+      like: params[:like],
+      dislike: params[:dislike],
+      user_id: params[:user_id],
+      post_id: params[:post_id]
+    )
+
+    if comment.persisted?
+      render json: comment
+    else
+      render json: {error:'Could not create new comment'}, status: 422
+    end
+
+
+  end # create
   
   def index
-    @comments = Comment.all
+    @comments = Comment.all.order("created_at DESC")
   
     respond_to do |format|
       format.html

@@ -1,7 +1,8 @@
 import React from "react";
 import axios from "axios";
 
-import Comments from "./Comments";
+// import Comments from "./Comments";
+import { Route, HashRouter as Router, Link, Redirect } from 'react-router-dom';
 
 
 
@@ -78,12 +79,13 @@ class Posts extends React.Component {
                         <p>create time:{post.created_at}</p>
                         <p>created by:{post.user.screen_name}</p>
 
-                        < Comments singlePost={post} />
+                        <Link to={`/comments/${post.id}`}>Comments</Link>
 
-                        <br />
+                        <br /><br />
                     </li>)}
 
             </ul>
+
         )
     }
 

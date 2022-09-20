@@ -8,7 +8,7 @@ class PostsController < ApplicationController
   end
 
   def index
-    @comments = Comment.all
+    # @comments = Comment.all.order("created_at DESC")
     @posts = Post.all.order("created_at DESC")
  
 
@@ -28,7 +28,15 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find params[:id]
-  end
+
+    respond_to do |format|
+      format.html
+      format.json{
+        render json: @post, include:
+        [:comments => {:include => :user}]
+      }
+    end
+  end # show
 
   def edit
     @post = Post.find params[:id]
