@@ -13,7 +13,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json{render json: @posts, include:[:user]}
+      format.json{render json: @posts, include:[:user, :comments]}
     end
   end
 

@@ -19,23 +19,30 @@ class UsersController < ApplicationController
       email: params[:email],
       screen_name: params[:screen_name],
       password: params[:password],
+      password_confirmation: params[:password_confirmation],
       avatar: params[:avatar],
       location: params[:location],
       is_admin: params[:is_admin]
     )
 
 
-    if user.persisted?
-      auth_token = Knock::AuthToken.new payload: {sub: user.id}
-      render json: {
-        user: user,
-        auth_token: auth_token
-      }
-    else
-      # 'Unprocessable Entity', i.e. force an HTTP error code
-      render json: {error: 'Could not create new user'}, status: 422
-    end
+    if user.errors.any?
+      render json: {error: user.errors.full_messages}, status: 422
 
+    else
+
+      if user.persisted?
+        auth_token = Knock::AuthToken.new payload: {sub: user.id}
+        render json: {
+          user: user,
+          auth_token: auth_token
+        }
+      else
+        # 'Unprocessable Entity', i.e. force an HTTP error code
+        render json: {error: 'Could not create new user'}, status: 422
+      end
+    end
+    
   end # create
 
   def index
@@ -83,15 +90,6 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:screen_name, :email, :password, :password_confirmation, :avatar, :location, :is_admin )
   end # user_params
-
-  def auth_token
-    if entity.respond_to? :to_token_payload
-      AuthToken.new payload: entity.to_token_payload
-    else
-      AuthToken.new payload: {sub: entity.id}
-    end
-
-  end # auth_token
 
    
 end # class UsersController

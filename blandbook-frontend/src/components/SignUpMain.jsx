@@ -18,7 +18,8 @@ class SignUpMain extends React.Component{
     }
 
     componentDidMount(){
-        this.setNewUser();
+        // this.setNewUser(); // if setNewUser directly, errors are undefined
+        this.fetchNewUser();
     }
 
 
@@ -28,6 +29,7 @@ class SignUpMain extends React.Component{
                 email: object.email, 
                 screen_name: object.screen_name, 
                 password: object.password, 
+                password_confirmation: object.password_confirmation,
                 avatar: object.avatar, 
                 location: object.location, 
                 is_admin: object.is_admin 
@@ -36,30 +38,48 @@ class SignUpMain extends React.Component{
             console.log('setNewUser Response', res.data); // for test
 
             localStorage.setItem("jwt", res.data.auth_token.token)
-            axios.defaults.headers.common['Authorization'] = 'Bearer ' + res.data.auth_token.token;
+            this.props.setCurrentUserSignup();
 
             this.setState({
                 newUser: res.data.user,
                 // loading: false
             });
 
-            if (res.data.auth_token.token){
-                window.location.reload(false);
-            }
+            // if (res.data.auth_token.token){
+            //     window.location.reload(false);
+            // }
 
         } catch(err){
             this.setState({
                 // loading: false,
-                error: err
+                error: err.response.data.error
             });
-            console.warn(err);  
+            // console.log(err.response.data.error);  // for test
         }
     } // setNewUser
+
+
+    fetchNewUser = () => {
+        this.setState({
+            newUser: this.state.newUser,
+            error: this.state.error
+        })
+    }
+
 
     render(){
         return (
                 <div className="signup_form">
+
                    <SignUp notifySignUp={this.setNewUser} />
+
+                    {this.state.error
+                    &&
+                    this.state.error.map((er,index) =>
+                    <li key={index}>
+                        <p>{er}</p>
+                    </li>
+                    )}
                 </div>
         );
     } // render

@@ -60,6 +60,12 @@ u5 = User.create!(
 
 puts("Created #{User.count} users")
 
+##### Following ########
+
+u1.following << u2 << u3
+
+puts("I have created some followers for #{u1.screen_name}. They are following #{u1.following.pluck(:screen_name)}")
+
 # Post ##############################################################
 
 Post.destroy_all
