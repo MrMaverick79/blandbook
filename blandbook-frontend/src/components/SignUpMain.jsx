@@ -18,7 +18,7 @@ class SignUpMain extends React.Component{
     }
 
     componentDidMount(){
-        // this.setNewUser();
+        // this.setNewUser(); // if setNewUser directly, errors are undefined
         this.fetchNewUser();
     }
 
@@ -38,16 +38,16 @@ class SignUpMain extends React.Component{
             console.log('setNewUser Response', res.data); // for test
 
             localStorage.setItem("jwt", res.data.auth_token.token)
-            axios.defaults.headers.common['Authorization'] = 'Bearer ' + res.data.auth_token.token;
+            this.props.setCurrentUserSignup();
 
             this.setState({
                 newUser: res.data.user,
                 // loading: false
             });
 
-            if (res.data.auth_token.token){
-                window.location.reload(false);
-            }
+            // if (res.data.auth_token.token){
+            //     window.location.reload(false);
+            // }
 
         } catch(err){
             this.setState({
@@ -65,11 +65,6 @@ class SignUpMain extends React.Component{
             error: this.state.error
         })
     }
-
-
-
-
-
 
 
     render(){

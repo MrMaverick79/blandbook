@@ -1,6 +1,8 @@
 import React from "react";
 import axios from "axios";
 
+import Comments from "./Comments";
+
 
 
 // TODO: Posts Sort?
@@ -76,13 +78,7 @@ class Posts extends React.Component {
                         <p>create time:{post.created_at}</p>
                         <p>created by:{post.user.screen_name}</p>
 
-
-                        {/* <p><strong>Comments</strong></p>
-                        {post.comments
-                        &&
-                        post.comments.map((c, key) => <p key={key}>{c.content}</p> )}
-                        post.comments.map((c, key) => {console.log(`Skill ${c.content} `)}   */}
-
+                        < Comments singlePost={post} />
 
                         <br />
                     </li>)}
@@ -95,3 +91,4 @@ class Posts extends React.Component {
 }
 
 export default Posts
+

@@ -27,7 +27,7 @@ class UsersController < ApplicationController
 
 
     if user.errors.any?
-      render json: {error: user.errors.full_messages}, status: 500
+      render json: {error: user.errors.full_messages}, status: 422
 
     else
 
@@ -90,15 +90,6 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:screen_name, :email, :password, :password_confirmation, :avatar, :location, :is_admin )
   end # user_params
-
-  def auth_token
-    if entity.respond_to? :to_token_payload
-      AuthToken.new payload: entity.to_token_payload
-    else
-      AuthToken.new payload: {sub: entity.id}
-    end
-
-  end # auth_token
 
    
 end # class UsersController
