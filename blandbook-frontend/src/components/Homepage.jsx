@@ -78,15 +78,11 @@ class Homepage extends React.Component {
   }
 
   componentDidMount() {
+    
     console.log(this.state.currentUser);
 
     // want to check if the user is logged in when we visit
     this.setCurrentUser();
- 
- 
- 
- 
- 
   }
 
 
