@@ -15,7 +15,7 @@ class CommentsController < ApplicationController
   
     respond_to do |format|
       format.html
-      format.json{render json: @comments}
+      format.json{render json: @comments, include:[:user]}
     end
   end
 

@@ -9,13 +9,21 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.all
- 
+    @comments = Comment.all
 
+    # posts include user & comment
+    # comments include its user
     respond_to do |format|
       format.html
-      format.json{render json: @posts, include:[:user, :comments]}
+      format.json{
+        render json: 
+        @posts, include:
+        [:user, 
+         :comments => {:include => :user} 
+        ]}
     end
-  end
+
+  end # index
 
   def show
     @post = Post.find params[:id]

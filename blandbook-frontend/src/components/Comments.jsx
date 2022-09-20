@@ -11,8 +11,10 @@ class Comments extends React.Component {
                 &&
                 this.props.singlePost.comments.map((c, key) => 
                 <li key={key}>
-                <p >{c.content}</p> 
-                
+                <p>
+                    {c.user.screen_name} says: 
+                    <em>{c.content}</em> 
+                </p>
                 </li>
                 )}
                 {/* post.comments.map((c, key) => {console.log(`Skill ${c.content} `)}   */}
