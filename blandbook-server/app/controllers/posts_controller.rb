@@ -32,8 +32,9 @@ class PostsController < ApplicationController
       format.html
       format.json{
         render json: @post, include:
-        [:comments => {:include => :user}]
-      }
+        [:user,
+         :comments => {:include => :user}
+        ]}
     end
   end # show
 

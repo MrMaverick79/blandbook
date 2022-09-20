@@ -1,6 +1,13 @@
 
+// some issues:
+// refresh
+// sequence
+// todo delete
+// todo if not login, hide the comment label
 import React from "react";
 import axios from "axios";
+
+import NewComment from "./NewComment";
 
 const BASE_URL_SINGLE_POST = 'http://localhost:3000/posts/'
 
@@ -10,10 +17,13 @@ class Comments extends React.Component {
 
 
     state = {
-        loasing: false,
-        currentUser: null,
         postId: null,
         commentDetails: null,
+        postDetails: {
+            title: null,
+            postUser: null
+        },
+
 
 
     }
@@ -21,26 +31,37 @@ class Comments extends React.Component {
     componentDidMount() {
         // console.log('componentDidMount', this.props.match.params.postId) // for test
 
-        this.setState({
-            postId: this.props.match.params.postId,
-            currentUser: this.props.currentUser
-        })
+        // this.setState({
+        //     postId: this.props.match.params.postId,
+        // })
         // console.log('componentDidMount state', this.state.postId) //null
-        this.getCommentDetails(this.props.match.params.postId)
+        this.getCommentDetails()
     }
 
-    getCommentDetails = async(postId) => {
+    getCommentDetails = async() => {
         try{
-            const res = await axios.get(BASE_URL_SINGLE_POST + postId + '.json')
-            // console.log('getCommentDetails', res.data.comments); // for test
+            const res = await axios.get(BASE_URL_SINGLE_POST + this.props.match.params.postId + '.json')
+            // console.log('getCommentDetails', res.data); // for test
             this.setState({
-                commentDetails: res.data.comments
+                commentDetails: res.data.comments.reverse(),
+                postDetails: {
+                    title: res.data.title,
+                    postUser: res.data.user.screen_name
+                }
             })
 
         }catch(err){
             console.log('There was an error', err)
         }
     }
+
+    // fetchCommentAgain = async() => {
+    //     const res = await axios.get(BASE_URL_SINGLE_POST + this.state.postId + '.json')
+
+    //     this.setState({
+    //         commentDetails: res.data.comments.reverse()
+    //     })
+    // }
 
 
 
@@ -49,7 +70,16 @@ class Comments extends React.Component {
     render() {
         return (
             <div>
-                <p><strong>Comments</strong></p>
+                <p><strong>Post: </strong></p>
+                <p>{this.state.postDetails.title}</p>
+                <p>by {this.state.postDetails.postUser}</p>
+                <br />
+
+                <NewComment currentUser = {this.props.currentUser} currentPostId = {this.props.match.params.postId} createNewComment = {this.getCommentDetails} />
+                <br />
+
+                <p><strong>Comments History</strong></p>
+                <ul>
                 {this.state.commentDetails
                 &&
                 this.state.commentDetails.map((comment, index) => 
@@ -68,8 +98,8 @@ class Comments extends React.Component {
                     <p>create time:{comment.created_at}</p>
 
                     <br />
-                </li>
-                )}
+                </li>)}
+                </ul>
             </div>
         );
     }

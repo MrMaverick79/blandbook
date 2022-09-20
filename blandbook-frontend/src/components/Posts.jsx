@@ -107,6 +107,7 @@ class Posts extends React.Component {
 
                         <button onClick={()=>this.handleDelete(post.id)}>Delete</button>
                         <br />
+
                         <hr />
                     </li>)}
                     

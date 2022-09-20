@@ -25,7 +25,7 @@ class CommentsController < ApplicationController
   end # create
   
   def index
-    @comments = Comment.all.order("created_at DESC")
+    @comments = Comment.all.order("created_at ASC")
   
     respond_to do |format|
       format.html
