@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   # authenticate the user which will ensure only logged in users are able to access these methods
-  before_action :authenticate_user, except: [:index, :allData, :all_chat_rooms, :create]
+  before_action :authenticate_user, except: [:index, :allData, :all_chat_rooms, :create, :end_follow]
   
   def current
     render json: current_user
@@ -81,6 +81,12 @@ end
   end
 
   def update
+  end
+
+  def endFollow #deletes a follower
+    puts ("Params #{params}")
+    @user = User.find params[:id]
+    @user.followers.destroy params[:follower_id]
   end
 
   def destroy
