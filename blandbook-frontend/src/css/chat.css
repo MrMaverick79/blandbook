@@ -1,6 +1,55 @@
+html{
+  font-size: 12pt;
+}
 
+
+.chatroom {
+  /* the entire thing */
+  background-color:  rgba(251, 196, 183, 0.6);
+  border: 2px solid black;
+  margin: 10px;
+  border-radius: 5%;
+  padding: 5%;
+
+}
+
+.chatroom_title {
+  font-size: 2px;
+}
+
+.chatroomMain{
+
+  /* this is the container for the sidebar and the messages */
+  display: inline-flex;
+}
 #chat_avatar{
-    max-width: 25px;
+  width: 30px;
+  border-radius: 50%;
+}
+
+/* This is the UL */
+#chatroom_members {  
+  list-style: none;
+  padding: 10px;
+ 
+}
+
+/* the LI */
+.chatMembers{
+  margin-right: 10px;
+  width: 10vw;
+}
+
+.chatroom_sidebar{
+  max-width: 15%;
+}
+
+.chatroom_sidebar h4{
+  font-size: 0.8rem;
+}
+
+.chatMembers_sidebar {
+  font-size: 0.5em;
 }
 
 #chat_message{
@@ -66,6 +115,8 @@
     opacity: 100%;
   }
   
-
+.chatroomFeed_container{
+  background-color: rgba(251, 196, 183, 0.6);
+}
 
 

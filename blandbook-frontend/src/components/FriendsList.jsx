@@ -33,6 +33,73 @@ class FriendsList extends React.Component {
 
     }
 
+
+    unfollow = async(userId, followerId) => {
+        console.log('Unfollow clicked', userId, followerId);
+
+
+         await axios.delete(`http://localhost:3000//followers/${userId}/${followerId}`).then(response => {
+            //delete then do another axios reques
+            this.getFriendsList()
+         }).then(response => {
+            this.showFollowers();
+            this.showFollowing();
+         })
+         
+         
+       
+
+        
+
+        
+        
+
+    }
+
+    showFollowers = () => {
+        if(this.state.friendsList.followers){
+           return  this.state.friendsList.followers.map(follower=> {
+                return (
+                    <li className="friendList">
+                        <img src={follower.avatar} className="friendAvatar" /> 
+                        <p>{follower.screen_name}</p>
+                        <a onClick={()=> {this.unfollow(this.props.currentUser.id, follower.id)}} className='unfollowButton'>unfollow</a>
+
+
+                    </li>
+                
+                )})
+
+        
+
+        
+        
+               } else {
+                    return 
+                }
+
+        
+    }
+
+    showFollowing= () => {
+         if(this.state.friendsList.following){
+        return  this.state.friendsList.following.map(follow=> {
+            return (
+                <li className="friendList">
+                    <img src={follow.avatar} className="friendAvatar"/> 
+                    <p>{follow.screen_name}</p>
+
+
+
+                </li>
+            
+            )})
+        } else{
+            return
+        }
+    }
+
+
    
         
     
@@ -48,17 +115,24 @@ class FriendsList extends React.Component {
 
                         <h4>People you follow:</h4>
 
-                     
-                        <Friend details={this.state.friendsList} following={false}/>
+                        {
+                            this.showFollowers()
+                            
+                        }
+                        
 
 
                     </div>
 
                     <div className="followingList">
                         
-                        <h4>People who folow you:</h4>
-                        <Friend details={this.state.friendsList} following={true}/>
+                        <h4>People who follow you:</h4>
 
+                        {
+                            this.showFollowing()
+                            
+                        }
+                        
                     </div>
 
 

@@ -13,13 +13,24 @@ class Posts extends React.Component {
 
     state = {
         postsArr: null,
+        userDetails: null
     }
+    
+
+    componentDidMount() {
+        this.getPosts()
+    }
+    
+
+    
 
     getPosts = async () => {
         const res = await axios.get(`http://localhost:3000/posts.json`)
+        const response = await axios.get(`http://localhost:3000/friends/${this.props.currentUser.id}.json`)
 
         this.setState({
             postsArr: res.data.reverse(),
+            userDetails: response.data
         })
     }
 
@@ -84,11 +95,12 @@ class Posts extends React.Component {
         this.updateRenderData(id)
     }
 
+    
 
-    componentDidMount() {
-        this.getPosts()
+    checkFollow = (posterId) => {
+        
+        return <span>Follow</span>
     }
-
 
     render() {
         return (
@@ -101,7 +113,11 @@ class Posts extends React.Component {
                         <p>{post.title}</p>
                         <p>like:{post.like} <button onClick={() => this.handleClick(post.id, post.like, index, 'like')}>👍</button> | dislike:{post.dislike} <button onClick={() => this.handleClick(post.id, post.dislike, index, 'dislike')}>👎</button></p>
                         <p>create time:{post.created_at}</p>
-                        <p>created by:{post.user.screen_name}</p>
+                        <p>created by:{post.user.screen_name}<span className={this.checkFollow(post.user.id)}></span></p> 
+                        
+                           
+
+                         
 
                         {this.props.currentUser
                             &&

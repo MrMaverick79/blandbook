@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import * as serviceWorker from './serviceWorkerRegistration';
 import actionCable from 'actioncable';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Homepage from './components/Homepage';
 
 const CableApp = {}

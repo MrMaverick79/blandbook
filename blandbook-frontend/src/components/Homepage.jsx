@@ -168,7 +168,7 @@ class Homepage extends React.Component {
               {/* all a_tags here */}
 
               <Link to="#">{Icons.settings}</Link>
-              <Link to="#">{Icons.home}</Link>
+              <Link to="/">{Icons.home}</Link>
               <Link to="#">{Icons.account}</Link>
               <Link to="#">{Icons.chat}</Link>
               <Link to="#">{Icons.groupChat}</Link>
@@ -231,7 +231,7 @@ class Homepage extends React.Component {
                   <div className="chat_container">
                     <AllChatRooms classNames={'all_chat_rooms'} currentUser_id={this.state.currentUser.id} clickedRoom={this.getChatRoom} />
 
-
+                   
 
                     {this.state.room //ensure got the room id first
                       &&
