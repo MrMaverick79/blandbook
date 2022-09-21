@@ -13,6 +13,7 @@ class Posts extends React.Component {
 
     state = {
         postsArr: null,
+        clicked: false,
     }
 
     getPosts = async () => {
@@ -24,45 +25,46 @@ class Posts extends React.Component {
     }
 
 
-    handleClick = async (post_id, numb, index, fc) => {
+    handleClick = async (post_id, numb, index, fc, e) => {
+
+        // let clickedTemp = this.state.clicked
+        
+        this.setState({
+            clicked: !this.state.clicked
+        })
+
+        let newNumber = numb
+
+        if (this.state.clicked) {
+            newNumber -= 1
+            e.target.className = 'material-symbols-outlined unfilled'
+        } else { 
+            newNumber += 1
+            e.target.className = 'material-symbols-outlined filled'
+         }
 
         let adjust = null
         if (fc === 'like') {
+
             adjust = {
                 post: {
-                    like: numb + 1
+                    like: newNumber
                 }
             }
         } else {
             adjust = {
                 post: {
-                    dislike: numb + 1
+                    dislike: newNumber
                 }
             }
         }
 
         const res = await axios.patch(`http://localhost:3000/posts/${post_id}`, adjust)
-
-        const newArr = this.state.postsArr.map((post, i) => {
-            if (i === index && fc === 'like') {
-                let newPost = { ...post }
-                newPost.like = post.like + 1
-                return newPost
-            } else if (i === index && fc === 'dislike') {
-                let newPost = { ...post }
-                newPost.dislike = post.dislike + 1
-                return newPost
-            }
-            else {
-                return post
-            }
-        })
-
-        this.setState({
-            postsArr: newArr
-        })
+        this.getPosts()
 
     }
+
+
 
     updateRenderData = (post_id) => {
 
@@ -99,7 +101,7 @@ class Posts extends React.Component {
                 {this.state.postsArr.map((post, index) =>
                     <li key={post.id}>
                         <p>{post.title}</p>
-                        <p>like:{post.like} <button onClick={() => this.handleClick(post.id, post.like, index, 'like')}>👍</button> | dislike:{post.dislike} <button onClick={() => this.handleClick(post.id, post.dislike, index, 'dislike')}>👎</button></p>
+                        <p>like:{post.like} <button class="material-symbols-outlined" onClick={(e) => this.handleClick(post.id, post.like, index, 'like', e)}>thumb_up</button> | dislike:{post.dislike} <button class="material-symbols-outlined" onClick={(e) => this.handleClick(post.id, post.dislike, index, 'dislike', e)}>thumb_down</button></p>
                         <p>create time:{post.created_at}</p>
                         <p>created by:{post.user.screen_name}</p>
 
