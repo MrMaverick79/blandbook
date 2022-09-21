@@ -8,7 +8,7 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all.order("created_at ASC")
+    @posts = Post.all.order("created_at DESC")
  
 
     # posts include user & comment
