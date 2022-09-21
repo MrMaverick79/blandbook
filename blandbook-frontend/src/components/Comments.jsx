@@ -1,11 +1,10 @@
 
 // some issues:
-// refresh
-// sequence
 // todo delete
 // todo if not login, hide the comment label
 import React from "react";
 import axios from "axios";
+import { Route, HashRouter as Router, Link, Redirect } from 'react-router-dom';
 
 import NewComment from "./NewComment";
 
@@ -63,6 +62,17 @@ class Comments extends React.Component {
     //     })
     // }
 
+    handleDelete = async(id) => {
+        try{
+            const res = await axios.delete(`http://localhost:3000/comments/${id}`)
+            // console.log('handleDelete', res.data); // for test
+            this.getCommentDetails()
+
+        }catch(err){
+            console.log('There was an error of delete', err)
+        }
+    }
+
 
 
 
@@ -73,6 +83,7 @@ class Comments extends React.Component {
                 <p><strong>Post: </strong></p>
                 <p>{this.state.postDetails.title}</p>
                 <p>by {this.state.postDetails.postUser}</p>
+                <Link to="/" >Go Back to Post</Link>
                 <br />
 
                 <NewComment currentUser = {this.props.currentUser} currentPostId = {this.props.match.params.postId} createNewComment = {this.getCommentDetails} />
@@ -97,7 +108,13 @@ class Comments extends React.Component {
 
                     <p>create time:{comment.created_at}</p>
 
+                    {comment.user.id === this.props.currentUser.id
+                    &&
+                    <button onClick={() => this.handleDelete(comment.id)}>Delete</button>
+                    }
+
                     <br />
+                    <hr />
                 </li>)}
                 </ul>
             </div>

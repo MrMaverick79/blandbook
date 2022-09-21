@@ -103,7 +103,11 @@ class Posts extends React.Component {
                         <p>create time:{post.created_at}</p>
                         <p>created by:{post.user.screen_name}</p>
 
+                        {this.props.currentUser
+                        &&
                         <Link to={`/comments/${post.id}`}>Comments</Link>
+                        }
+                        
 
                         <button onClick={()=>this.handleDelete(post.id)}>Delete</button>
                         <br />

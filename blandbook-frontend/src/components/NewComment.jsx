@@ -10,7 +10,7 @@ class NewComment extends React.Component {
         newcontent: null,
         like: 0,
         dislike: 0,
-        user_id: this.props.currentUser.id,
+        // user_id: this.props.currentUser.id,
         post_id: this.props.currentPostId
     };
     
@@ -29,12 +29,14 @@ class NewComment extends React.Component {
                 content: this.state.newcontent,
                 like: this.state.like,
                 dislike: this.state.dislike,
-                user_id: this.props.currentUser.id,
+                // user_id: this.props.currentUser.id,
                 post_id: this.props.currentPostId
             });
             // console.log('NewComment handleSubmit', res.data); // for test 
 
             this.props.createNewComment()
+            // console.log('newcomment handlesubmit', ev.target[0].value); //test
+            ev.target[0].value = ''
 
         }catch(err){
             console.error('Error', err);

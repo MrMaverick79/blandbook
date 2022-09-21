@@ -11,7 +11,8 @@ class CommentsController < ApplicationController
       content: params[:content],
       like: params[:like],
       dislike: params[:dislike],
-      user_id: params[:user_id],
+      # user_id: params[:user_id],
+      user_id: current_user.id,
       post_id: params[:post_id]
     )
 
@@ -49,7 +50,7 @@ class CommentsController < ApplicationController
 
   def destroy
     Comment.destroy params[:id]
-    redirect_to comments_path
+    # redirect_to comments_path
   end
 
   private
