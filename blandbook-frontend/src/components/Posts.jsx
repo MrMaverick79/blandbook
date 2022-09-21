@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-
+import '../css/posts.css';
 // import Comments from "./Comments";
 import { Route, HashRouter as Router, Link, Redirect } from 'react-router-dom';
 import Comments from "./Comments";
@@ -14,7 +14,8 @@ class Posts extends React.Component {
     state = {
         postsArr: null,
         userDetails: null,
-        clicked: false
+        clicked: false,
+        loading: true
     }
     
 
@@ -100,8 +101,26 @@ class Posts extends React.Component {
     
 
     checkFollow = (posterId) => {
+        const following = this.state.userDetails.followers
+   
+        following.forEach(follow => {
+            
+      
+         if(follow.id ===  posterId){
+                console.log('Returning true');
+                return true
+                 
+            } else{
+                console.log('Returning false');
+                return false
+                
+            }
+            
         
-        return <span>Follow</span>
+        });
+
+      
+
     }
 
     render() {
@@ -115,7 +134,7 @@ class Posts extends React.Component {
                         <p>{post.title}</p>
                         <p>like:{post.like} <button class="material-symbols-outlined" onClick={(e) => this.handleClick(post.id, post.like, index, 'like', e)}>thumb_up</button> | dislike:{post.dislike} <button class="material-symbols-outlined" onClick={(e) => this.handleClick(post.id, post.dislike, index, 'dislike', e)}>thumb_down</button></p>
                         <p>create time:{post.created_at}</p>
-                        <p>created by:{post.user.screen_name}<span className={this.checkFollow(post.user.id)}></span></p> 
+                        <p>created by:{post.user.screen_name}</p> 
                         
                            
 
@@ -131,6 +150,21 @@ class Posts extends React.Component {
                             this.props.currentUser.id === post.user_id &&
                             <button onClick={() => this.handleDelete(post.id)}>Delete</button>
                         }
+                        {' | '}
+
+                        
+                        {
+                         
+                         (this.checkFollow(post.user.id) === true &&
+                         <p>Follow</p>)
+                        }
+
+                         
+                                       
+                        
+                    
+                        
+                    
                         <br />
 
                         <hr />
