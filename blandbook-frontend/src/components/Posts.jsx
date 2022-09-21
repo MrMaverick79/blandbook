@@ -102,28 +102,28 @@ class Posts extends React.Component {
 
     
 
-    checkFollow = (posterId) => {
-        const following = this.state.userDetails.followers
+    // checkFollow = (posterId) => {
+    //     const following = this.state.userDetails.followers
    
-        following.forEach(follow => {
+    //     following.forEach(follow => {
             
       
-         if(follow.id ===  posterId){
-                console.log('Returning true');
-                return true
+    //      if(follow.id ===  posterId){
+    //             console.log('Returning true');
+    //             return true
                  
-            } else{
-                console.log('Returning false');
-                return false
+    //         } else{
+    //             console.log('Returning false');
+    //             return false
                 
-            }
+    //         }
             
         
-        });
+    //     });
 
       
 
-    }
+    // }
 
     render() {
         return (
@@ -155,11 +155,11 @@ class Posts extends React.Component {
                         {' | '}
 
                         
-                        {
+                        {/* {
                          
                          (this.checkFollow(post.user.id) === true &&
                          <p>Follow</p>)
-                        }
+                        } */}
 
                          
                                        
