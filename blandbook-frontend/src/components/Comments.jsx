@@ -22,19 +22,26 @@ class Comments extends React.Component {
             title: null,
             postUser: null
         },
-
-
-
     }
 
     componentDidMount() {
+        // const newLocal = this;
         // console.log('componentDidMount', this.props.match.params.postId) // for test
 
         // this.setState({
         //     postId: this.props.match.params.postId,
         // })
+        // console.log(this.props.match.params.postId);
+        // this.state.postId &&
         // console.log('componentDidMount state', this.state.postId) //null
         this.getCommentDetails()
+        // console.log(this.props.history.location.pathname.split('/').slice(-1)[0]);
+    }
+
+    componentDidUpdate(){
+       if (this.props.history.location.pathname.split('/').slice(-1)[0] !== this.state.postId) {
+        this.getCommentDetails()
+       }
     }
 
     getCommentDetails = async() => {
@@ -42,6 +49,7 @@ class Comments extends React.Component {
             const res = await axios.get(BASE_URL_SINGLE_POST + this.props.match.params.postId + '.json')
             // console.log('getCommentDetails', res.data); // for test
             this.setState({
+                postId:this.props.match.params.postId,
                 commentDetails: res.data.comments.reverse(),
                 postDetails: {
                     title: res.data.title,

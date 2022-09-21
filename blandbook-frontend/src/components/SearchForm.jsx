@@ -10,13 +10,16 @@ class SearchForm extends React.Component {
     }
 
 
-    handleSubmit = async () =>{
+    handleSubmit = async (e) =>{
         // this.props.results(this.state.results) 
         // this.props.results(this.state.query) // test only
-        
+        e.preventDefault()
         const res = await axios.get(`http://localhost:3000/search/${this.state.query}`)
 
-        this.props.results(res.data) 
+        this.props.results(res.data)
+
+        e.target[0].value = ''
+
     }
 
     handleInput = (e) => {

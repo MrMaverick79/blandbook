@@ -48,7 +48,7 @@ class Posts extends React.Component {
                 let newPost = { ...post }
                 newPost.like = post.like + 1
                 return newPost
-            } else if(i === index && fc === 'dislike'){
+            } else if (i === index && fc === 'dislike') {
                 let newPost = { ...post }
                 newPost.dislike = post.dislike + 1
                 return newPost
@@ -64,11 +64,11 @@ class Posts extends React.Component {
 
     }
 
-    updateRenderData = (post_id) =>{
+    updateRenderData = (post_id) => {
 
         let newArr = []
 
-        this.state.postsArr.forEach(post=>{
+        this.state.postsArr.forEach(post => {
             if (post.id !== post_id) {
                 newArr.push(post)
             }
@@ -79,7 +79,7 @@ class Posts extends React.Component {
         })
     }
 
-    handleDelete = async(id) =>{
+    handleDelete = async (id) => {
         const res = await axios.delete(`http://localhost:3000/posts/${id}`)
         this.updateRenderData(id)
     }
@@ -94,7 +94,7 @@ class Posts extends React.Component {
         return (
             this.state.postsArr &&
             <ul className={this.props.classNames}>
-                <CreatePost currentUser = {this.props.currentUser} updateData = {this.getPosts}/>
+                <CreatePost currentUser={this.props.currentUser} updateData={this.getPosts} />
                 <hr />
                 {this.state.postsArr.map((post, index) =>
                     <li key={post.id}>
@@ -104,17 +104,21 @@ class Posts extends React.Component {
                         <p>created by:{post.user.screen_name}</p>
 
                         {this.props.currentUser
-                        &&
-                        <Link to={`/comments/${post.id}`}>Comments</Link>
+                            &&
+                            <Link to={`/comments/${post.id}`}>Comments</Link>
                         }
-                        
 
-                        <button onClick={()=>this.handleDelete(post.id)}>Delete</button>
+                        {' | '}
+                        {
+                            this.props.currentUser.id === post.user_id &&
+                            <button onClick={() => this.handleDelete(post.id)}>Delete</button>
+                        }
                         <br />
 
                         <hr />
+                        <br />
                     </li>)}
-                    
+
             </ul>
 
         )
