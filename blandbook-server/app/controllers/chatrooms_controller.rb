@@ -8,7 +8,10 @@ class ChatroomsController < ApplicationController
   end
 
   def create
-    @chatroom = Chatroom.create chatroom_params
+    @user = User.find params[:owner]
+    @chatroom = Chatroom.new chatroom_params
+    @chatroom.users << @user
+    @chatroom.save
   end
 
   def index
