@@ -17,7 +17,11 @@ Rails.application.routes.draw do
 
   post '/users' => 'users#create'
 
+  #Start and stop following another user
+  post '/followers/:id/:follow_id' => 'users#startFollow'
+
   delete '/followers/:id/:follower_id' => 'users#endFollow'
+
 
   # these lines are needed for user authentication
   # this one gets the login token from knock

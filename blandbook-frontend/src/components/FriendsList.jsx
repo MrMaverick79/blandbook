@@ -56,6 +56,27 @@ class FriendsList extends React.Component {
 
     }
 
+    follow = async(userId, followId) => {
+        console.log('Unfollow clicked', userId, followId);
+
+
+         await axios.post(`http://localhost:3000//followers/${userId}/${followId}`).then(response => {
+            //add then do another axios reques
+            this.getFriendsList()
+         }).then(response => {
+            this.showFollowers();
+            this.showFollowing();
+         })
+         
+           
+
+        
+
+        
+        
+
+    }
+
     showFollowers = () => {
         if(this.state.friendsList.followers){
            return  this.state.friendsList.followers.map(follower=> {
@@ -89,6 +110,7 @@ class FriendsList extends React.Component {
                     <img src={follow.avatar} className="friendAvatar"/> 
                     <p>{follow.screen_name}</p>
 
+                    <a onClick={()=> {this.follow(this.props.currentUser.id, follow.id)}} className='unfollowButton'>Follow Back </a>
 
 
                 </li>
