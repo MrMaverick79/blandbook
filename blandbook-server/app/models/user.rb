@@ -18,11 +18,11 @@ class User < ApplicationRecord
     
     #These associations are needed to allow following and followers
 
-    has_many :following_relationships,  class_name: 'Follow', foreign_key: 'follower_id'
+    has_many :following_relationships, class_name: 'Follow', foreign_key: 'follower_id'
     has_many :followed_relationships,  class_name: 'Follow', foreign_key: 'followed_id'
 
     has_many :following, through: :following_relationships, source: :followed
-    has_many :followers,  through: :following_relationships, source: :follower 
+    has_many :followers, through: :followed_relationships,  source: :follower
 
     # This checks whether an existing follow relationship exists, and will not allow a new one to be formed if it already exists
     def follow_safe ( user_to_follow)

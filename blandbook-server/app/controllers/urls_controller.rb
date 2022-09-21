@@ -31,6 +31,8 @@ class UrlsController < ApplicationController
 
   end
 
+ 
+
   def destroy
     Url.destroy params[:id]
   end

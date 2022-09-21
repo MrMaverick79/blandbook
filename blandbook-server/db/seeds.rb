@@ -63,6 +63,14 @@ puts("Created #{User.count} users")
 ##### Following ########
 
 u1.following << u2 << u3
+Follow.create follower_id:  u1.id, followed_id: u2.id
+Follow.create follower_id:  u1.id, followed_id: u3.id
+Follow.create follower_id:  u1.id, followed_id: u4.id
+Follow.create follower_id:  u1.id, followed_id: u5.id
+Follow.create follower_id:  u2.id, followed_id: u1.id
+Follow.create follower_id:  u3.id, followed_id: u1.id
+Follow.create follower_id:  u4.id, followed_id: u1.id
+Follow.create follower_id:  u5.id, followed_id: u1.id
 
 puts("I have created some followers for #{u1.screen_name}. They are following #{u1.following.pluck(:screen_name)}")
 
