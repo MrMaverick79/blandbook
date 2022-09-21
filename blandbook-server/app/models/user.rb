@@ -34,4 +34,13 @@ class User < ApplicationRecord
         end
     end #follow_safe 
 
+
+    # GEOCODING: automatically lookup the GPS coordinates for the location
+    geocoded_by :location
+    
+    after_validation :geocode # actually do lookup when .create-ing
+
+
+
+
 end

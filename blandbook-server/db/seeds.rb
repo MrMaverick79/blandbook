@@ -9,7 +9,7 @@ u1 = User.create!(
     screen_name: 'Brendan',
     password: 'chicken',
     avatar: 'https://ca.slack-edge.com/T0351JZQ0-U03P01S843S-01985e04bd02-512',
-    location: 'ACT',
+    location: '176 London Cct, Canberra ACT 2601',
     is_admin: true
 
 )
@@ -20,7 +20,7 @@ u2 = User.create!(
     screen_name: 'Daniel',
     password: 'chicken',
     avatar: 'https://ca.slack-edge.com/T0351JZQ0-U03MJ8J6HDM-5f097b22b732-512',
-    location: 'ADL',
+    location: 'North Terrace, Adelaide SA 5000',
     is_admin: false
 
 )
@@ -31,7 +31,7 @@ u3 = User.create!(
     screen_name: 'Lei',
     password: 'chicken',
     avatar: 'https://ca.slack-edge.com/T0351JZQ0-U03NNDB9R0Q-6c09b92ee7f1-512',
-    location: 'MEL',
+    location: '180 St Kilda Rd, Melbourne VIC 3006',
     is_admin: false
 
 )
@@ -42,7 +42,7 @@ u4 = User.create!(
     screen_name: 'Luke',
     password: 'chicken',
     avatar: 'https://ca.slack-edge.com/T0351JZQ0-U0MSE1HD0-8dc3c966c5ce-512',
-    location: 'SYD',
+    location: '1 Market St, Sydney NSW 2000',
     is_admin: false
 
 )
@@ -53,7 +53,7 @@ u5 = User.create!(
     screen_name: 'Shay',
     password: 'chicken',
     avatar: 'https://ca.slack-edge.com/T0351JZQ0-U03P75YV48L-f0033bff348a-512',
-    location: 'SYD',
+    location: '32-34 Oaks Ave, Dee Why NSW 2099',
     is_admin: false
 
 )

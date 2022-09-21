@@ -1,7 +1,9 @@
 
 // some issues:
-// todo delete
-// todo if not login, hide the comment label
+// TODO: thumbup and thumbdown one time one user
+// without using websocket and setInterval, could we see the update 
+// forgot how to set the button direct press enter to submit, need to check, not hurry
+
 import React from "react";
 import axios from "axios";
 import { Route, HashRouter as Router, Link, Redirect } from 'react-router-dom';
@@ -16,7 +18,7 @@ class Comments extends React.Component {
 
 
     state = {
-        postId: null,
+        postId: this.props.match.params.postId,
         commentDetails: null,
         postDetails: {
             title: null,
@@ -34,12 +36,15 @@ class Comments extends React.Component {
         //     postId: this.props.match.params.postId,
         // })
         // console.log('componentDidMount state', this.state.postId) //null
-        this.getCommentDetails()
+
+        this.getCommentDetails();
+        // setInterval(this.getCommentDetails, 2000);
     }
 
     getCommentDetails = async() => {
         try{
-            const res = await axios.get(BASE_URL_SINGLE_POST + this.props.match.params.postId + '.json')
+            // const res = await axios.get(BASE_URL_SINGLE_POST + this.props.match.params.postId + '.json')
+            const res = await axios.get(BASE_URL_SINGLE_POST + this.state.postId + '.json')
             // console.log('getCommentDetails', res.data); // for test
             this.setState({
                 commentDetails: res.data.comments.reverse(),

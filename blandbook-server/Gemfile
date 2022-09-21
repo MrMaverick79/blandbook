@@ -65,3 +65,7 @@ gem 'bcrypt'
 gem 'knock'
 # use for authentication
 gem 'jwt'
+
+# user for map
+gem 'geocoder'
+

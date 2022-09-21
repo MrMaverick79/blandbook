@@ -271,7 +271,7 @@ class Homepage extends React.Component {
                 }
 
                 <div className="post_container">
-                  <Switch>
+                  {/* <Switch> */}
                     {/* <Posts classNames={'posts'} currentUser={this.state.currentUser} />
                      */}
 
@@ -284,7 +284,7 @@ class Homepage extends React.Component {
                      <Route exact path="/comments/:postId" render={(props) => <Comments currentUser={this.state.currentUser} {...props}/>}/>
                     }
                      
-                </Switch>
+                {/* </Switch> */}
                 </div>
 
 

@@ -4,6 +4,8 @@ import { Route, HashRouter as Router, Link } from 'react-router-dom';
 
 import LoginMain from './components/LoginMain';
 
+import googleMapReact from 'google-map-react';
+
 
 function App() {
 
