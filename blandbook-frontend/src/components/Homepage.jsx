@@ -270,8 +270,10 @@ class Homepage extends React.Component {
 
                 }
 
-                <div className="post_container">
-                  {/* <Switch> */}
+                {this.state.currentUser
+                  &&
+                  <div className="post_container">
+                    {/* <Switch> */}
                     {/* <Posts classNames={'posts'} currentUser={this.state.currentUser} />
                      */}
 
@@ -279,14 +281,13 @@ class Homepage extends React.Component {
                       <Posts classNames={'posts'} currentUser={this.state.currentUser} />
                     </Route>
 
-                    {this.state.currentUser
-                      &&
-                      <Route exact path="/comments/:postId" render={(props) => <Comments currentUser={this.state.currentUser} {...props} />} />
-                    }
 
-                  {/* </Switch> */}
-                </div>
+                    <Route exact path="/comments/:postId" render={(props) => <Comments currentUser={this.state.currentUser} {...props} />} />
 
+
+                    {/* </Switch> */}
+                  </div>
+                }
 
               </div>
 
