@@ -38,7 +38,11 @@
 }
 
 .click_user_info {
-    padding-left: 29%;
+    /* padding-left: 29%; */
+    width: 100%;
+    position: absolute;
+    top: 39px;
+    left: 110%;
 }
 
 
