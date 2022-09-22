@@ -31,6 +31,15 @@ class ChatroomsController < ApplicationController
 
   end
 
+  def avatar #for showing the avatar (only)
+    @user = User.find params[:id]
+
+    render json: {
+      avatar: @user.avatar
+    } 
+
+  end
+
   def edit
     @chatroom =  Chatroom.find params[:id]
   end
@@ -52,5 +61,7 @@ class ChatroomsController < ApplicationController
     params.require(:chatroom).permit(:title, :image, :owner)
 
   end
+
+  
 
 end

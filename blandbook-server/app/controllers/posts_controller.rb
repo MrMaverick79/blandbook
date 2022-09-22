@@ -4,7 +4,9 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.create post_params
+    if current_user.id == params[:post][:user_id]
+      @post = Post.create post_params
+    end
   end
 
   def index
@@ -48,7 +50,9 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    Post.destroy params[:id]
+    if current_user.id == Post.find(params[:id]).user_id
+      Post.destroy params[:id]
+    end
   end
 
   def search
@@ -68,3 +72,4 @@ class PostsController < ApplicationController
 
 
 end
+  

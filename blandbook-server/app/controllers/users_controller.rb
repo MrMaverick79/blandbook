@@ -69,6 +69,8 @@ class UsersController < ApplicationController
     render json: @user, include: [:posts, :chatrooms, :comments, :messages, :urls, :following, :followers]
 
   end
+
+  
   
 
   def all_chat_rooms
@@ -121,7 +123,7 @@ end
   end # user_params
 
 
-  private
+  
 
   def follow_safe ( current_user, user_to_follow)
     if current_user.followers.include? user_to_follow
