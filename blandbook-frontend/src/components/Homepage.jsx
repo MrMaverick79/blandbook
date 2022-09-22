@@ -28,6 +28,8 @@ import SearchResults from './SearchResults';
 import FriendsList from './FriendsList';
 import Comments from "./Comments";
 import UserLocation from './UserLocation';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
 const BASE_URL = 'http://localhost:3000'
 
@@ -43,7 +45,10 @@ class Homepage extends React.Component {
       chatroom: {},
       users: [],
       messages: []
-    }
+    },
+    showSearchResults:false,
+    query:null,
+    
   }
 
   getCurrentUser = (userInfo) => {
@@ -57,10 +62,12 @@ class Homepage extends React.Component {
     console.log(userInfo.id);
   }
 
-  getQueryResults = (resutls) => {
+  getQueryResults = (resutls,query) => {
     // get the query words from search form
     this.setState({
-      queryResults: resutls
+      queryResults: resutls,
+      showSearchResults:true,
+      query:query
     })
     console.log('Query from Search Form: ', resutls);
 
@@ -119,6 +126,7 @@ class Homepage extends React.Component {
 
   } //end getRoomData
 
+  
 
   updateAppStateRoom = (newroom) => { //newroom is an object we get back from the ChatroomWebSocket after a message has been posted.
     console.log('The new room recieved by udpateAppStateRoom is', newroom);
@@ -203,9 +211,11 @@ class Homepage extends React.Component {
 
 
 
-              <SearchResults results={this.state.queryResults} classNames={'search_results'} close={() => {
+              <SearchResults currentUser={this.state.currentUser} query={this.state.query} show={this.state.showSearchResults} results={this.state.queryResults} classNames={'search_results'} close={() => {
                 this.setState({
-                  queryResults: null
+                  queryResults: null,
+                  query:null,
+                  showSearchResults:false
                   // close the search results
                 })
               }} />
@@ -227,13 +237,21 @@ class Homepage extends React.Component {
                   <SignUpMain setCurrentUserSignup={this.setCurrentUser} />
                 }
 
+                {this.state.currentUser
+                  &&
+                  <div className="friendsList">
+
+                  </div>
+
+                }
 
                 {this.state.currentUser //ensure got the user info first
                   &&
                   <div className="chat_container">
                     <AllChatRooms classNames={'all_chat_rooms'} currentUser_id={this.state.currentUser.id} clickedRoom={this.getChatRoom} />
+                    <FriendsList currentUser={this.state.currentUser} update={this.state.friendsUpdate}/>
 
-                   
+
 
                     {this.state.room //ensure got the room id first
                       &&
@@ -257,9 +275,9 @@ class Homepage extends React.Component {
 
 
 
-                      
+
                     }
-                    
+
                     {/* TODO need to find another location to put map */}
                     < UserLocation />
 
@@ -269,15 +287,9 @@ class Homepage extends React.Component {
 
                 }
 
-                {this.state.currentUser
-                  &&
-                  <div className="friendsList">
-                    <FriendsList currentUser={this.state.currentUser} />
-                  </div>
 
-                }
 
-                
+
 
 
                 {this.state.currentUser
@@ -286,13 +298,13 @@ class Homepage extends React.Component {
                     {/* <Switch> */}
                     {/* <Posts classNames={'posts'} currentUser={this.state.currentUser} />
                      */}
-                    
+
                     <Route exact path="/" render={() => <Posts classNames={'posts'} currentUser={this.state.currentUser} />} />
 
                     <Route exact path="/comments/:postId" render={(props) => <Comments currentUser={this.state.currentUser} {...props} />} />
-                    
+
                     <Route exact path="/newroom">
-                      <ChatroomCreate currentUser={this.state.currentUser}/>
+                      <ChatroomCreate currentUser={this.state.currentUser} />
                     </Route>
 
 

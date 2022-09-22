@@ -42,3 +42,15 @@
   display: inline;
 }
  
+.post_title p{
+  font-size: 18px;
+}
+
+.editor{
+  font-size: 18px;
+}
+
+.post_container{
+  max-height: 90vh;
+  overflow-y: scroll;
+}

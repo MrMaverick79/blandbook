@@ -14,6 +14,7 @@
     list-style: none;
     padding: 10px;
     align-items: baseline;
+    overflow-x: scroll;
     /* justify-content: space-evenly; */
 }
 
@@ -21,6 +22,15 @@
     display: block;
     width: 60px;
     text-align: center;
+}
+
+.newRoom_btn{
+    display: block;
+    width: 80px;
+    position: relative;
+    top: 10px;
+    left: 10px;
+   
 }
 
 .all_chat_rooms img {

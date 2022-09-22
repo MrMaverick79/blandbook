@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { Route, HashRouter as Router, Link, Redirect } from 'react-router-dom';
 import ChatroomCreate from "./ChatroomCreate";
-
+import Button from 'react-bootstrap/Button';
 class AllChatRooms extends React.Component {
 
     state = {
@@ -51,7 +51,8 @@ class AllChatRooms extends React.Component {
                         )}
                     <li> 
                         {
-                        <Link to={`/newroom/`}>Add new</Link>
+                            <Button className="newRoom_btn" variant="warning" size="sm" href={`http://localhost:3001/#/newroom`}>Add New </Button>
+                        // <Link to={`/newroom/`}>Add new</Link>
                         }
                         
                     </li>

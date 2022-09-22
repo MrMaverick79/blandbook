@@ -16,7 +16,11 @@ class SearchForm extends React.Component {
         e.preventDefault()
         const res = await axios.get(`http://localhost:3000/search/${this.state.query}`)
 
-        this.props.results(res.data)
+
+   
+        this.props.results(res.data,this.state.query)
+    
+
 
         e.target[0].value = ''
 
@@ -30,7 +34,6 @@ class SearchForm extends React.Component {
 
     render() {
         return (
-
             <form className={this.props.classNames} onSubmit={this.handleSubmit}>
                 <input type="text" placeholder="Search for Posts or Users" onChange={this.handleInput}/>
                 <input type='submit' className="material-symbols-outlined" value='search' />
