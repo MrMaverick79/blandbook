@@ -41,7 +41,7 @@ class CurrentUserInfo extends React.Component {
                 {' '}
                 Hi {this.state.currentUser.screen_name}
                 {' '}
-                <div className="material-symbols-outlined" onClick={this.handleLogout }>logout</div>
+                <div className="material-symbols-outlined" onClick={this.handleLogout} style={{cursor:"pointer"}}>logout</div>
             </div>
         )
     }
