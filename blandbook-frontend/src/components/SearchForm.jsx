@@ -16,7 +16,11 @@ class SearchForm extends React.Component {
         e.preventDefault()
         const res = await axios.get(`http://localhost:3000/search/${this.state.query}`)
 
-        this.props.results(res.data)
+
+   
+            this.props.results(res.data)
+    
+
 
         e.target[0].value = ''
 
