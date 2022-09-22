@@ -19,7 +19,7 @@ import CurrentUserInfo from './CurrentUserInfo';
 import Icons from './Icons';
 import SearchForm from './SearchForm';
 import AllChatRooms from './AllChatRooms';
-
+import ChatroomCreate from './ChatroomCreate';
 import Login from './Login';
 import Posts from './Posts';
 import SignUpMain from './SignUpMain';
@@ -283,6 +283,11 @@ class Homepage extends React.Component {
 
 
                     <Route exact path="/comments/:postId" render={(props) => <Comments currentUser={this.state.currentUser} {...props} />} />
+                    
+                    <Route exact path="/newroom">
+                      <ChatroomCreate currentUser={this.state.currentUser}/>
+                    </Route>
+
 
 
                     {/* </Switch> */}

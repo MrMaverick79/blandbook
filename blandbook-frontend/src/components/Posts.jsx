@@ -121,7 +121,6 @@ class Posts extends React.Component {
         
     //     });
 
-      
 
     // }
 

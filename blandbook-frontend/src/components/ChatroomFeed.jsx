@@ -9,58 +9,97 @@ class ChatroomFeed extends React.Component {
 
     state={
         loading: null,
+        totalMessages: [],
     }
     componentDidMount(){
+       
+        
         if(this.props.chatroom.allMessages){
+            
             this.showMessages(this.props.allMessages)
         }else{
             console.log('Loading');
+        }
+
+        if(this.props.messages){
+            this.showMessages(this.props.messages)
+            this.setState({
+                totalMessages: this.props.allMessages, ...this.props.messages
+            })
         }
 
 
     }
 
     componentDidUpdate(prevProps){
-        if(this.props.chatroom.allMessages !== prevProps.chatroom.allMessages){
+        
+       if(this.props.chatroom.allMessages !== prevProps.chatroom.allMessages){
+           
             this.showMessages(this.props.allMessages)
+            this.updateMessages()
+                // const newMessages = this.props.messages.map(message=> console.log('Message', message))
+                
+                // this.setState({
+                //     totalMessages: newMessages
+                // })
+            
         }else{
             console.log('Loading');
         }
 
+        if(this.props.chatroom !== prevProps.chatroom){
+            this.setState({
+                totalMessages: []
+            })
+
+            this.showMessages(this.updateMessages())
+        
+        }
+
         
     }
+
+    // updateMessages = () => {
+        //     let newArr = [];
+        //     if(this.props.messages){
+        //         newArr = this.props.messages.forEach(message=> newArr.push(message))
+                
+        //     }
+        //     this.setState({
+        //         allMessages: newArr
+        //     })
+            
+        // }
     
     showMessages( allMessages ){
+
+        this.updateMessages()
+        //sortmessages firs 
+        const sortedMessages = allMessages.sort((a, b)=> {
+            return a.created_at - b.created_at
+        })
+        return sortedMessages.reverse().map( message =>{
+            
         
-        return allMessages.map( message =>{
-           
+
             return <ChatroomMessage key={message.id} message={message.content} senderId={message.user_id} userId={this.props.user} />
         })
-    }
-    
-   
-    // }
-    // showAllMessages = (messageList) =>{
-    //     console.log('We are in showAllMessages', messageList);
-    //     // return messageList.map( message =>{
-    //     //     return {message} />
-    //     const elements = []
-    //     Object.entries(messageList).forEach(
-    //         ([key, value]) => {
-    //            console.log('Just checking', value.content);
-    //            elements.push(<p>{value.content}</p>)
-               
-              
-            
-    //         })
-      
-    //     return elements.map( message =>{
-    //             return <ChatroomMessage  message={message} />
-    //     });
         
-    //     // })
-    // }
+    }
 
+    updateMessages = () => {
+        //updatemessages should eb called below
+        let newMessages = this.props.messages.map(message=> message)
+        console.log("This is new message", newMessages);
+        // this.showMessages() //arg should be new props
+        this.props.allMessages.forEach(message=> newMessages.push(message))
+        console.log("This is the updated message", newMessages);
+        return newMessages //I need to make this the obehect we iterate over
+        
+    }
+
+    
+    
     render(){
 
         return(
@@ -72,9 +111,11 @@ class ChatroomFeed extends React.Component {
                 { 
                     this.props.chatroom.messages
                     ? 
-                    (this.showMessages(this.props.allMessages))
+                    (this.showMessages(this.updateMessages()))
                     :
                     (<h3>Be the first to post!</h3>) 
+
+                    
                 }
 
                 </div>

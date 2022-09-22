@@ -177,7 +177,7 @@ class ChatroomShow extends React.Component {
 
                         </div>
                     
-                        <ChatroomFeed chatroom={this.props.roomData.chatroom} messages={this.props.roomData.messages.content} allMessages={this.state.allMessages} user={this.props.currentUser}/>
+                        <ChatroomFeed chatroom={this.props.roomData.chatroom} messages={this.props.roomData.messages} allMessages={this.state.allMessages} user={this.props.currentUser}/>
 
 
                  </div>
