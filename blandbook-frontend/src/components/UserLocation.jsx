@@ -12,15 +12,59 @@ import Icons from './Icons';
 const GMAPS_API_KEY = 'AIzaSyADkhbnJGwJi7ykabSqHuwM9ibeSwI0NkE';
 const BASE_URL_ALL_USERS = 'http://localhost:3000/users.json'
 
+// Marker Icon on the map
 function MyMarker(text){
-    return <div className='mapMarker' onClick={text.myClickProps}>{Icons.location} {text.name}</div>
+    return (
+    <div className='mapMarker' onClick={text.myClickProps}><abbr title="Click for details">{Icons.location} {text.name}</abbr>
+    </div>
+    );
 }
+
+// Return map bounds based on list of places
+const getMapBounds = (map, maps, locations) => {
+    const bounds = new maps.LatLngBounds();
+
+    locations.forEach((location) => {
+        bounds.extend(
+            new maps.LatLng(
+                location.latitude, 
+                location.longitude
+        ));
+    }); //.forEach
+    return bounds;
+};
+
+// Re-center map when resizing the window
+const bindResizeListener = (map, maps, bounds) => {
+    maps.event.addDomListenerOnce(map, 'idle', () => {
+        maps.event.addDomListener(window, 'resize', () => {
+            map.fitBounds(bounds);
+        })
+    })
+}
+
+
+// Fit map to its bounds after the api is loaded
+const apiIsLoaded = (map, maps, locations) => {
+    if (map){
+        // Get bounds by our places
+        const bounds = getMapBounds(map, maps, locations);
+        // Fit map to bounds
+        map.fitBounds(bounds);
+        // Bind the resize listener
+        bindResizeListener(map, maps, bounds);
+    }
+};
+
+
+
 
 
 class UserLocation extends React.Component {
 
     state = {
         users: [],
+        clickUser: null,
         loading: true,
         error: null
     }
@@ -43,33 +87,39 @@ class UserLocation extends React.Component {
     } // fetchUsers
 
 
-    // click the user location logo and give its id
-    handleMarkerClick = (id) => {
-        console.log('handleMarkerClick', id);
+    // click the user location logo and give its infomation
+    handleMarkerClick = (clickUserInfo) => {
+        console.log(clickUserInfo);
+        console.log(clickUserInfo.location.split(' ').slice(-3).join(', '));
+        this.setState({clickUser: clickUserInfo});
     }
 
-    //anywhere on the map will give lat and lng
-    handleMapClick = (ev) => {
-        console.log('handleMapClick', ev);
-    }
+    // //anywhere on the map will give lat and lng
+    // handleMapClick = (ev) => {
+    //     console.log('handleMapClick', ev);
+    // }
+
+
 
 
 
 
 
     render(){
+       
         return (
             <div>
-                <p>I'm User Location</p>
                 <div  className='user_location'>
                     <GoogleMapReact
-                        onClick={this.handleMapClick}
+                        // onClick={this.handleMapClick}
                         bootstrapURLKeys = {{key: GMAPS_API_KEY}}
                         defaultCenter = {{lat: -33.7536, lng: 151.2886}}
                         defaultZoom = {10}
+                        yesIWantToUseGoogleMapApiInternals
+                        onGoogleApiLoaded={({map, maps}) => apiIsLoaded(map, maps, this.state.users)}
                     >
 
-                        <MyMarker lat={-33.7536} lng={151.2886} />
+                        {/* <MyMarker lat={-33.7536} lng={151.2886} /> */}
 
                         {
                             this.state.users.map(item => 
@@ -77,13 +127,23 @@ class UserLocation extends React.Component {
                             key={item.id} 
                             name = {item.screen_name}
                             lat={item.latitude} lng={item.longitude}
-                            myClickProps = {() => this.handleMarkerClick(item.id)}
+                            myClickProps = {() => this.handleMarkerClick(item)}
                             />)
                         }
 
-
                     </GoogleMapReact>
                 </div>
+
+                {this.state.clickUser &&
+                    <div className='click_user_info'>
+
+                        <strong>User Information</strong>
+                        <p>Name: {this.state.clickUser.screen_name}</p>
+                        <p>Email: {this.state.clickUser.email}</p>
+                        <p>Location: {this.state.clickUser.location.split(' ').slice(-3).join(', ')}</p>
+                                                   
+                    </div>
+                }
             </div>
         );
     } // render()
@@ -91,4 +151,3 @@ class UserLocation extends React.Component {
 } // class UserLocation
 
 export default UserLocation
-

@@ -13,3 +13,21 @@
     cursor: pointer;
 }
 
+.mapMarker:hover {
+    color: #961bd9;
+    background-color: #961bd9;
+    transform: scale(1.2);
+}
+
+.mapMarker .details {
+    display: none;
+}
+
+.mapMarker:hover .details{
+    display: inline-block;
+}
+
+
+
+
+
