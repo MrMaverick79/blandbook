@@ -1,0 +1,15 @@
+
+.user_location{
+    width: 35vw;
+    height: 50vh;
+}
+
+.mapMarker {
+    color: #f06292;
+    background-color: #f06292;
+    border-radius: 50%;
+    width: 8px;
+    height: 8px;
+    cursor: pointer;
+}
+

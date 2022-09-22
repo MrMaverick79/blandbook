@@ -31,6 +31,9 @@ Rails.application.routes.draw do
   get '/users/last_user' => 'users#show'
   get '/users/:id/all_chat_rooms' => 'users#all_chat_rooms'
 
+  # for getting user location
+  get '/users/locations' => 'users#get_locations'
+
   get '/search/:keyword' => 'posts#search'
 
   

@@ -1,10 +1,14 @@
 class UsersController < ApplicationController
 
   # authenticate the user which will ensure only logged in users are able to access these methods
-  before_action :authenticate_user, except: [:index, :allData, :all_chat_rooms, :create, :end_follow]
+  before_action :authenticate_user, except: [:index, :allData, :all_chat_rooms, :create, :end_follow, :get_locations]
   
   def current
     render json: current_user
+  end
+
+  def get_locations
+    render json: User.all
   end
 
 
