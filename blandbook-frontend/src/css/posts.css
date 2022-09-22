@@ -34,3 +34,11 @@
   padding: 0;
   vertical-align: middle;
 }
+.hideFollow span{
+  display: none;
+}
+
+.showFollow{
+  display: inline;
+}
+ 

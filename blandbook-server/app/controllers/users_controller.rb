@@ -1,7 +1,9 @@
 class UsersController < ApplicationController
 
   # authenticate the user which will ensure only logged in users are able to access these methods
-  before_action :authenticate_user, except: [:index, :allData, :all_chat_rooms, :create, :end_follow]
+  before_action :authenticate_user, except: [:index, :allData, :all_chat_rooms, :create, :end_follow ]
+
+
   
   def current
     render json: current_user
@@ -65,6 +67,8 @@ class UsersController < ApplicationController
     render json: @user, include: [:posts, :chatrooms, :comments, :messages, :urls, :following, :followers]
 
   end
+
+  
   
 
   def all_chat_rooms
@@ -81,6 +85,15 @@ end
   end
 
   def update
+  end
+
+  def startFollow #follows another user
+    puts ("Params #{params}")
+    @current_user = User.find params[:id]
+    @other_user = User.find params[:follow_id]
+    follow_safe  @current_user, @other_user 
+    #   Follow.create @current_user.id, @other_user.id 
+    # end
   end
 
   def endFollow #deletes a follower
@@ -106,6 +119,18 @@ end
   def user_params
     params.require(:user).permit(:screen_name, :email, :password, :password_confirmation, :avatar, :location, :is_admin )
   end # user_params
+
+
+  
+
+  def follow_safe ( current_user, user_to_follow)
+    if current_user.followers.include? user_to_follow
+        return false
+    else
+       current_user.followers << user_to_follow
+        return true #The follow was successful
+    end
+  end #follow_safe 
 
    
 end # class UsersController

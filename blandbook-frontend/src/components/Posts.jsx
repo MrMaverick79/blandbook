@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-
+import '../css/posts.css';
 // import Comments from "./Comments";
 import { Route, HashRouter as Router, Link, Redirect } from 'react-router-dom';
 import Comments from "./Comments";
@@ -16,12 +16,24 @@ class Posts extends React.Component {
 
     state = {
         postsArr: null,
+        userDetails: null,
+        clicked: false,
+        loading: true,
         like: {},
         dislike: {},
     }
+    
+
+    componentDidMount() {
+        this.getPosts()
+    }
+    
+
+    
 
     getPosts = async () => {
         const res = await axios.get(`http://localhost:3000/posts.json`)
+        const response = await axios.get(`http://localhost:3000/friends/${this.props.currentUser.id}.json`)
 
         this.setState({
             postsArr: res.data,
@@ -91,11 +103,30 @@ class Posts extends React.Component {
         this.getPosts()
     }
 
+    
 
-    componentDidMount() {
-        this.getPosts()
-    }
+    // checkFollow = (posterId) => {
+    //     const following = this.state.userDetails.followers
+   
+    //     following.forEach(follow => {
+            
+      
+    //      if(follow.id ===  posterId){
+    //             console.log('Returning true');
+    //             return true
+                 
+    //         } else{
+    //             console.log('Returning false');
+    //             return false
+                
+    //         }
+            
+        
+    //     });
 
+      
+
+    // }
 
 
 

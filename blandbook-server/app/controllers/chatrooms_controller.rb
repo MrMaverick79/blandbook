@@ -8,7 +8,10 @@ class ChatroomsController < ApplicationController
   end
 
   def create
-    @chatroom = Chatroom.create chatroom_params
+    @user = User.find params[:owner]
+    @chatroom = Chatroom.new chatroom_params
+    @chatroom.users << @user
+    @chatroom.save
   end
 
   def index
@@ -25,6 +28,15 @@ class ChatroomsController < ApplicationController
 
     render json: @chatroom, include: [:messages, :users]
     
+
+  end
+
+  def avatar #for showing the avatar (only)
+    @user = User.find params[:id]
+
+    render json: {
+      avatar: @user.avatar
+    } 
 
   end
 
@@ -49,5 +61,7 @@ class ChatroomsController < ApplicationController
     params.require(:chatroom).permit(:title, :image, :owner)
 
   end
+
+  
 
 end

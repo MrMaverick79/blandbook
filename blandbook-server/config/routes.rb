@@ -14,10 +14,16 @@ Rails.application.routes.draw do
   get '/friends/:id' => 'users#friends'
   get '/users' => 'users#index'
 
+  #To display only the avatar in the chat
+  get '/chatrooms/avatar/:id' => 'chatrooms#avatar'
 
   post '/users' => 'users#create'
 
+  #Start and stop following another user
+  post '/followers/:id/:follow_id' => 'users#startFollow'
+
   delete '/followers/:id/:follower_id' => 'users#endFollow'
+
 
   # these lines are needed for user authentication
   # this one gets the login token from knock
