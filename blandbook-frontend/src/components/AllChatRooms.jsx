@@ -1,6 +1,8 @@
 import React from "react";
 import axios from "axios";
 import { Route, HashRouter as Router, Link, Redirect } from 'react-router-dom';
+import ChatroomCreate from "./ChatroomCreate";
+
 class AllChatRooms extends React.Component {
 
     state = {
@@ -45,7 +47,12 @@ class AllChatRooms extends React.Component {
                             <p>{ele.title}</p>
                         </li></Link>
                         )}
-                    <li><Link to={`/newroom/`}>Add new</Link></li>
+                    <li> 
+                        {
+                        <Link to={`/newroom/`}>Add new</Link>
+                        }
+                        
+                    </li>
                 </ul>
                 
             </div>

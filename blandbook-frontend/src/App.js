@@ -1,4 +1,5 @@
 // import logo from './logo.svg';
+
 import './App.css';
 import { Route, HashRouter as Router, Link } from 'react-router-dom';
 
@@ -15,6 +16,8 @@ function App() {
   const groupChatIcon = <span class="material-symbols-outlined">forum</span>
   const weatherIcon = <span class="material-symbols-outlined">nest_farsight_weather</span>
   const calendarIcon = <span class="material-symbols-outlined">calendar_month</span>
+
+  // const locationIcon = <span class="material-symbols-outlined">location_on</span>
 
   return (
     <div className="App">
