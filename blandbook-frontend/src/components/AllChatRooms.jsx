@@ -41,11 +41,13 @@ class AllChatRooms extends React.Component {
                 <h6>All Chat Rooms:</h6>
                 <ul>
                     {this.state.rooms.map(ele=>
-                       <Link to={`/chatroom/${ele.id}`}> <li key={ele.id} onClick={()=>this.handleClick(ele)}>
+                    //    <Link to={`/chatroom/${ele.id}`}> 
+                       <li key={ele.id} onClick={()=>this.handleClick(ele)}>
                             <img src={ele.image} alt={ele.title}/>
                             <br />
                             <p>{ele.title}</p>
-                        </li></Link>
+                        </li>
+                        // </Link>
                         )}
                     <li> 
                         {
