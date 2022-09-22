@@ -3,7 +3,7 @@
 import { Route, HashRouter as Router, Link, Redirect } from 'react-router-dom';
 import React from 'react';
 import axios from 'axios';
-import { Switch } from "react-router";
+// import { Switch } from "react-router";
 
 // CSS imports
 import '../App.css';
@@ -12,6 +12,7 @@ import '../css/shows.css'
 import '../css/chat.css'
 import '../css/posts.css'
 import '../css/search.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 // Components imports
 import ChatroomShow from './ChatroomShow';
@@ -26,6 +27,7 @@ import SignUpMain from './SignUpMain';
 import SearchResults from './SearchResults';
 import FriendsList from './FriendsList';
 import Comments from "./Comments";
+import UserLocation from './UserLocation';
 
 const BASE_URL = 'http://localhost:3000'
 
@@ -255,7 +257,12 @@ class Homepage extends React.Component {
 
 
 
+                      
                     }
+                    
+                    {/* TODO need to find another location to put map */}
+                    < UserLocation />
+
                   </div>
 
 
@@ -270,17 +277,17 @@ class Homepage extends React.Component {
 
                 }
 
+                
+
+
                 {this.state.currentUser
                   &&
                   <div className="post_container">
                     {/* <Switch> */}
                     {/* <Posts classNames={'posts'} currentUser={this.state.currentUser} />
                      */}
-
-                    <Route exact path="/">
-                      <Posts classNames={'posts'} currentUser={this.state.currentUser} />
-                    </Route>
-
+                    
+                    <Route exact path="/" render={() => <Posts classNames={'posts'} currentUser={this.state.currentUser} />} />
 
                     <Route exact path="/comments/:postId" render={(props) => <Comments currentUser={this.state.currentUser} {...props} />} />
                     
