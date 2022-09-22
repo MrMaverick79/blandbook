@@ -53,7 +53,7 @@ u5 = User.create!(
     screen_name: 'Shay',
     password: 'chicken',
     avatar: 'https://ca.slack-edge.com/T0351JZQ0-U03P75YV48L-f0033bff348a-512',
-    location: 'Clem Jones Promenade, South Brisbane QLD 4101',
+    location: '2 Jessie Rd, Anna Bay NSW 2316',
     is_admin: false
 
 )

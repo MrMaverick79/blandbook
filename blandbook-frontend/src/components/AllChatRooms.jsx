@@ -47,7 +47,7 @@ class AllChatRooms extends React.Component {
                             <br />
                             <p>{ele.title}</p>
                         </li>
-                        // </Link>
+                    //    </Link>
                         )}
                     <li> 
                         {
