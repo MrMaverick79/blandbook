@@ -25,10 +25,12 @@ const getMapBounds = (map, maps, locations) => {
     const bounds = new maps.LatLngBounds();
 
     locations.forEach((location) => {
+        console.log('getMapBounds location', location)
         bounds.extend(
             new maps.LatLng(
                 location.latitude, 
                 location.longitude
+
         ));
     }); //.forEach
     return bounds;
@@ -46,7 +48,9 @@ const bindResizeListener = (map, maps, bounds) => {
 
 // Fit map to its bounds after the api is loaded
 const apiIsLoaded = (map, maps, locations) => {
+
     if (map){
+        console.log('check', map)
         // Get bounds by our places
         const bounds = getMapBounds(map, maps, locations);
         // Fit map to bounds
@@ -60,10 +64,12 @@ const apiIsLoaded = (map, maps, locations) => {
 
 
 
+
+
 class UserLocation extends React.Component {
 
     state = {
-        users: [],
+        users: null,
         clickUser: null,
         loading: true,
         error: null
@@ -71,6 +77,7 @@ class UserLocation extends React.Component {
 
     componentDidMount(){
         this.fetchUsers();
+
     }
 
     fetchUsers = async() => {
@@ -109,6 +116,7 @@ class UserLocation extends React.Component {
        
         return (
             <div>
+                {this.state.users &&
                 <div  className='user_location'>
                     <GoogleMapReact
                         // onClick={this.handleMapClick}
@@ -133,6 +141,7 @@ class UserLocation extends React.Component {
 
                     </GoogleMapReact>
                 </div>
+                }
 
                 {this.state.clickUser &&
                     <div className='click_user_info'>
