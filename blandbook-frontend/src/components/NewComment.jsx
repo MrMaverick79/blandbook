@@ -8,7 +8,7 @@ import Modal from 'react-bootstrap/Modal';
 import { EditorState, convertToRaw } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import draftToHtml from "draftjs-to-html";
-import { convertToHTML, convertFromHTML } from 'draft-convert';
+// import { convertToHTML, convertFromHTML } from 'draft-convert';
 
 const BASE_URL_CREATE_COMMENT = 'http://localhost:3000/comments'
 

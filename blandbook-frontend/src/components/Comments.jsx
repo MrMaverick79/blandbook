@@ -143,7 +143,7 @@ class Comments extends React.Component {
         return (
             <div>
                 <p className="fs-5 text-center"><strong>Post</strong></p>
-                <p className="fs-6">{this.state.postDetails.title}</p>
+                <p className="fs-6 post_title" dangerouslySetInnerHTML={{__html: this.state.postDetails.title}}></p>
                 <figcaption class="blockquote-footer">
                     <em>{this.state.postDetails.postUser} 
                     on:{new Date(this.state.postDetails.postDate).toLocaleDateString("en-AU", options)}</em>
@@ -162,7 +162,7 @@ class Comments extends React.Component {
                     as="li"
                     key={comment.id}
                 >
-                    <div className="fs-6">{comment.content}</div>
+                    <div className="fs-6 post_title" dangerouslySetInnerHTML={{__html: comment.content}}></div>
 
                     <Badge as={'div'} className="badge_like" bg="light" text="dark">
                         {comment.like}
