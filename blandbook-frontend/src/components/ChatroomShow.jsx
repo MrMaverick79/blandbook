@@ -154,7 +154,7 @@ class ChatroomShow extends React.Component {
                  <div className="chatroomMain">
                     <div className="chatroom_sidebar">  
                             
-                            <h4>Other people in {this.props.roomData.chatroom.title} </h4>
+                            <h4>Others in {this.props.roomData.chatroom.title} </h4>
                             <ul id='chatroom_members'>
                                 {this.showMembers(this.props.roomData.users)}
                                 
@@ -168,7 +168,7 @@ class ChatroomShow extends React.Component {
                         <h3 className="chatroom_title">Post a new message:</h3>
                            
                             <input type='text' value={this.state.newMessage} onChange={this.handleMessageInput} id="chat_input" placeholder="Type your message here..."></input>
-                            <submit type='submit' id="chat_button" value=""></submit>
+                            <submit><input type='submit' id="chat_button" value="" ></input></submit>
                             
                          </form>
 
