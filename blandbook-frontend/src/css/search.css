@@ -1,16 +1,7 @@
 
-.search_results {
-    list-style: none;
-    width: 50%;
-    text-align: center;
-    background-color: rgb(254, 234, 229);
-    position: fixed;
-    margin: 0 auto;
-    left: 0;
-    right: 0;
-    z-index: 100;
-    border-radius: 20px;
-    overflow: scroll;
-    max-height: 60vh;
-}
 
+.rlts-font, .rlts-font p{
+    font-size: 18px;
+    max-height: 47px;
+    overflow:hidden;
+}

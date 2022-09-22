@@ -1,7 +1,7 @@
 
 
 .friendAvatar {
-    width: 30px;
+    width: 40px;
     border-radius: 50%;
 }
 
@@ -9,3 +9,16 @@
     list-style: none;
 }
 
+
+.allFollow_container button{
+    /* width: 50px; */
+}
+
+.followList, .followingList{
+    display: flex;
+    text-align: center;
+    width: 100%;
+    max-height: 20vh;
+    overflow-x: scroll;
+    gap: 10px;
+}

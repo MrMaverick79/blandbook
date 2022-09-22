@@ -18,7 +18,7 @@ class SearchForm extends React.Component {
 
 
    
-            this.props.results(res.data)
+        this.props.results(res.data,this.state.query)
     
 
 
@@ -34,7 +34,6 @@ class SearchForm extends React.Component {
 
     render() {
         return (
-
             <form className={this.props.classNames} onSubmit={this.handleSubmit}>
                 <input type="text" placeholder="Search for Posts or Users" onChange={this.handleInput}/>
                 <input type='submit' className="material-symbols-outlined" value='search' />
