@@ -22,7 +22,7 @@ class ChatroomFeed extends React.Component {
         }
 
         if(this.props.messages){
-            this.showMessages(this.props.messages)
+            // this.showMessages(this.props.messages)
             this.setState({
                 totalMessages: this.props.allMessages, ...this.props.messages
             })
@@ -59,18 +59,7 @@ class ChatroomFeed extends React.Component {
         
     }
 
-    // updateMessages = () => {
-        //     let newArr = [];
-        //     if(this.props.messages){
-        //         newArr = this.props.messages.forEach(message=> newArr.push(message))
-                
-        //     }
-        //     this.setState({
-        //         allMessages: newArr
-        //     })
-            
-        // }
-    
+       
     showMessages( allMessages ){
 
         this.updateMessages()
@@ -94,7 +83,7 @@ class ChatroomFeed extends React.Component {
         // this.showMessages() //arg should be new props
         this.props.allMessages.forEach(message=> newMessages.push(message))
         console.log("This is the updated message", newMessages);
-        return newMessages //I need to make this the obehect we iterate over
+        return newMessages //I need to make this the object we iterate over
         
     }
 
@@ -105,7 +94,7 @@ class ChatroomFeed extends React.Component {
         return(
 
             <div className="chatroomFeed_container">
-                <h3>Chatroom feed:</h3>
+                <h3 className="chatroom_title">Chatroom feed:</h3>
 
                 <div className="messages">
                 { 
