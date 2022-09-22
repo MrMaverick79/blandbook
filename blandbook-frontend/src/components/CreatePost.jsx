@@ -80,7 +80,9 @@ class CreatePost extends React.Component {
                         <form onSubmit={this.handleSubmit}>
                             {/* <FloatingLabel controlId="floatingTextarea2" label="Create New Post"> */}
                             <Editor onChange={this.handleChange}
-                                    autoFocus/>
+                                    autoFocus
+                                    editorClassName="editor"
+                                    />
                                 {/* <Form.Control
                                     as="textarea"
                                     placeholder="Leave a comment here"

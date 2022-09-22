@@ -146,7 +146,7 @@ class Posts extends React.Component {
                             key={post.id}
                         >
                             <div className="ms-2 me-auto">
-                                <div className="fw-bold"><div dangerouslySetInnerHTML={{__html: post.title}}></div></div>
+                                <div className="fw-bold"><div className="post_title" dangerouslySetInnerHTML={{__html: post.title}}></div></div>
                                 <Badge as={'div'} className="badge_like" bg="light" text="dark">
                                 {post.like} <button className="material-symbols-outlined" onClick={(e) => this.handleClick(post.id, post.like, index, 'like', e)}>thumb_up</button> | {post.dislike} <button className="material-symbols-outlined" onClick={(e) => this.handleClick(post.id, post.dislike, index, 'dislike', e)}>thumb_down</button>
                                 </Badge>
