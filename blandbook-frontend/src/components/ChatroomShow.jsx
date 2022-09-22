@@ -106,8 +106,7 @@ class ChatroomShow extends React.Component {
 
         //we just need to add this to the props.data.messages
         //We could make this.state.allMEssages correspond to that
-        //And then use that iun the feed?
-        console.log('The new message recieved by updateAppStateRoom is', message); //this is a new data object
+       
         // // const newMessageList = [{...this.props.roomData.messages},{message}]
         // console.log("new message object is", newMessageList);
         // this.setState({
@@ -117,27 +116,15 @@ class ChatroomShow extends React.Component {
             allMessages: [message,...this.state.allMessages]
         })
 
-        console.log('After the updtate, the state is', this.state.allMessages);
+        console.log('After the update, the state is', this.state.allMessages);
 
 
 
-
-
-
+   
+        
+        
 
        
-        
-        
-
-        // this.setState({
-          
-        // //   currentRoom: {
-        // //     chatroom: newroom.chatroom.data,
-        // //     users: newroom.users,
-        // //     messages: newroom.messages
-        // //   }
-        
-        // })
       } //end uAS
 
     
@@ -163,7 +150,7 @@ class ChatroomShow extends React.Component {
         return(
 
             <div className="chatroom">
-                <h2 id="chatroom_title">Welcome to {this.props.roomData.chatroom.title}</h2>
+                <h2 className="chatroom_title">Welcome to {this.props.roomData.chatroom.title}</h2>
                  <div className="chatroomMain">
                     <div className="chatroom_sidebar">  
                             
@@ -173,9 +160,22 @@ class ChatroomShow extends React.Component {
                                 
                                 
                             </ul>   
+                        
+
+                        </div>
+                        <div className="chatroomForm">
+                        <form id='chat-form' onSubmit={this.submitMessage}>
+                        <h3 className="chatroom_title">Post a new message:</h3>
+                           
+                            <input type='text' value={this.state.newMessage} onChange={this.handleMessageInput} id="chat_input" placeholder="Type your message here..."></input>
+                            <submit type='submit' id="chat_button" value=""></submit>
+                            
+                         </form>
+
 
 
                         </div>
+                        
                     
                         <ChatroomFeed chatroom={this.props.roomData.chatroom} messages={this.props.roomData.messages} allMessages={this.state.allMessages} user={this.props.currentUser}/>
 
@@ -184,13 +184,7 @@ class ChatroomShow extends React.Component {
                 
                     
 
-                    <form id='chat-form' onSubmit={this.submitMessage}>
-                        <h3>Post a new message:</h3>
-                           
-                            <textarea type='text' value={this.state.newMessage} onChange={this.handleMessageInput} id="chat_input" placeholder="Type your message here..."></textarea>
-                            <input type='submit' id="chat_button" value=""></input>
-                            
-                    </form>
+                    
 
             {/* This invisible component is the core of the chat app. It contains the details of the cable through the WS */}
                  <ChatroomWebSocket
