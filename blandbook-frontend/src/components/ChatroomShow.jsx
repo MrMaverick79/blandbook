@@ -3,7 +3,7 @@ import React from "react";
 import '../css/chat.css';
 import ChatroomWebSocket from "./ChatroomWebSocket";
 import ChatroomFeed from "./ChatroomFeed";
-
+import { Button } from "react-bootstrap";
 
 class ChatroomShow extends React.Component {
 
@@ -150,7 +150,7 @@ class ChatroomShow extends React.Component {
 
             // console.log('This is members list', membersList);
             return membersList.map( member =>{
-                return <li><img src={member.avatar} id="chat_avatar"/>{member.screen_name} </li>
+                return <li className="chatMembers"><img src={member.avatar} id="chat_avatar"/>{member.screen_name} </li>
             })
 
 
@@ -163,20 +163,26 @@ class ChatroomShow extends React.Component {
         return(
 
             <div className="chatroom">
-                <h3 id="chatroom_title">Welcome to {this.props.roomData.chatroom.title}</h3>
+                <h2 id="chatroom_title">Welcome to {this.props.roomData.chatroom.title}</h2>
+                 <div className="chatroomMain">
                     <div className="chatroom_sidebar">  
-                        
-                        <h4>Other people in {this.props.roomData.chatroom.title} </h4>
-                        <ul id='chatroom_members'>
-                            {this.showMembers(this.props.roomData.users)}
                             
-                            
-                        </ul>   
+                            <h4>Other people in {this.props.roomData.chatroom.title} </h4>
+                            <ul id='chatroom_members'>
+                                {this.showMembers(this.props.roomData.users)}
+                                
+                                
+                            </ul>   
 
 
-                    </div>
+                        </div>
                     
-                    <ChatroomFeed chatroom={this.props.roomData.chatroom} messages={this.props.roomData.messages.content} allMessages={this.state.allMessages} user={this.props.currentUser}/>
+                        <ChatroomFeed chatroom={this.props.roomData.chatroom} messages={this.props.roomData.messages.content} allMessages={this.state.allMessages} user={this.props.currentUser}/>
+
+
+                 </div>
+                
+                    
 
                     <form id='chat-form' onSubmit={this.submitMessage}>
                         <h3>Post a new message:</h3>

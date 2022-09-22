@@ -87,6 +87,15 @@ end
   def update
   end
 
+  def startFollow #follows another user
+    puts ("Params #{params}")
+    @current_user = User.find params[:id]
+    @other_user = User.find params[:follow_id]
+    follow_safe  @current_user, @other_user 
+    #   Follow.create @current_user.id, @other_user.id 
+    # end
+  end
+
   def endFollow #deletes a follower
     puts ("Params #{params}")
     @user = User.find params[:id]
@@ -110,6 +119,18 @@ end
   def user_params
     params.require(:user).permit(:screen_name, :email, :password, :password_confirmation, :avatar, :location, :is_admin )
   end # user_params
+
+
+  private
+
+  def follow_safe ( current_user, user_to_follow)
+    if current_user.followers.include? user_to_follow
+        return false
+    else
+       current_user.followers << user_to_follow
+        return true #The follow was successful
+    end
+  end #follow_safe 
 
    
 end # class UsersController

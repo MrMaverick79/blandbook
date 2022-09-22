@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-
+import '../css/posts.css';
 // import Comments from "./Comments";
 import { Route, HashRouter as Router, Link, Redirect } from 'react-router-dom';
 import Comments from "./Comments";
@@ -13,82 +13,117 @@ class Posts extends React.Component {
 
     state = {
         postsArr: null,
+        userDetails: null,
+        clicked: false,
+        loading: true,
+        like: {},
+        dislike: {},
     }
-
-    getPosts = async () => {
-        const res = await axios.get(`http://localhost:3000/posts.json`)
-
-        this.setState({
-            postsArr: res.data.reverse(),
-        })
-    }
-
-
-    handleClick = async (post_id, numb, index, fc) => {
-
-        let adjust = null
-        if (fc === 'like') {
-            adjust = {
-                post: {
-                    like: numb + 1
-                }
-            }
-        } else {
-            adjust = {
-                post: {
-                    dislike: numb + 1
-                }
-            }
-        }
-
-        const res = await axios.patch(`http://localhost:3000/posts/${post_id}`, adjust)
-
-        const newArr = this.state.postsArr.map((post, i) => {
-            if (i === index && fc === 'like') {
-                let newPost = { ...post }
-                newPost.like = post.like + 1
-                return newPost
-            } else if (i === index && fc === 'dislike') {
-                let newPost = { ...post }
-                newPost.dislike = post.dislike + 1
-                return newPost
-            }
-            else {
-                return post
-            }
-        })
-
-        this.setState({
-            postsArr: newArr
-        })
-
-    }
-
-    updateRenderData = (post_id) => {
-
-        let newArr = []
-
-        this.state.postsArr.forEach(post => {
-            if (post.id !== post_id) {
-                newArr.push(post)
-            }
-        })
-
-        this.setState({
-            postsArr: newArr
-        })
-    }
-
-    handleDelete = async (id) => {
-        const res = await axios.delete(`http://localhost:3000/posts/${id}`)
-        this.updateRenderData(id)
-    }
-
+    
 
     componentDidMount() {
         this.getPosts()
     }
+    
 
+    
+
+    getPosts = async () => {
+        const res = await axios.get(`http://localhost:3000/posts.json`)
+        const response = await axios.get(`http://localhost:3000/friends/${this.props.currentUser.id}.json`)
+
+        this.setState({
+            postsArr: res.data,
+        })
+    }
+
+
+    handleClick = async (post_id, numb, index, fc, e) => {
+
+
+        let newNumber = numb
+
+        // let clickedTemp = this.state.clicked  
+        let adjust = null
+
+        let currentState = this.state[fc][post_id]
+
+        currentState === undefined &&
+            this.setState({
+                [fc]: { ...this.state[fc], [post_id]: true }
+            })
+
+
+        if (!currentState || currentState === undefined) {
+            newNumber += 1
+            e.target.className = 'material-symbols-outlined filled'
+        } else {
+            newNumber -= 1
+            e.target.className = 'material-symbols-outlined unfilled'
+        }
+
+        adjust = {
+            post: {
+                [fc]: newNumber
+            }
+        }
+        const res = await axios.patch(`http://localhost:3000/posts/${post_id}`, adjust)
+
+        this.setState({
+            [fc]: { ...this.state[fc], [post_id]: !currentState }
+        })
+
+
+        this.getPosts()
+
+    }
+
+
+
+    // updateRenderData = (post_id) => {
+
+    //     let newArr = []
+
+    //     this.state.postsArr.forEach(post => {
+    //         if (post.id !== post_id) {
+    //             newArr.push(post)
+    //         }
+    //     })
+
+    //     this.setState({
+    //         postsArr: newArr
+    //     })
+    // }
+
+    handleDelete = async (id) => {
+        const res = await axios.delete(`http://localhost:3000/posts/${id}`)
+        this.getPosts()
+    }
+
+    
+
+    // checkFollow = (posterId) => {
+    //     const following = this.state.userDetails.followers
+   
+    //     following.forEach(follow => {
+            
+      
+    //      if(follow.id ===  posterId){
+    //             console.log('Returning true');
+    //             return true
+                 
+    //         } else{
+    //             console.log('Returning false');
+    //             return false
+                
+    //         }
+            
+        
+    //     });
+
+      
+
+    // }
 
     render() {
         return (
@@ -99,9 +134,13 @@ class Posts extends React.Component {
                 {this.state.postsArr.map((post, index) =>
                     <li key={post.id}>
                         <p>{post.title}</p>
-                        <p>like:{post.like} <button onClick={() => this.handleClick(post.id, post.like, index, 'like')}>👍</button> | dislike:{post.dislike} <button onClick={() => this.handleClick(post.id, post.dislike, index, 'dislike')}>👎</button></p>
+                        <p>like:{post.like} <button className="material-symbols-outlined" onClick={(e) => this.handleClick(post.id, post.like, index, 'like', e)}>thumb_up</button> | dislike:{post.dislike} <button className="material-symbols-outlined" onClick={(e) => this.handleClick(post.id, post.dislike, index, 'dislike', e)}>thumb_down</button></p>
                         <p>create time:{post.created_at}</p>
-                        <p>created by:{post.user.screen_name}</p>
+                        <p>created by:{post.user.screen_name}</p> 
+                        
+                           
+
+                         
 
                         {this.props.currentUser
                             &&
@@ -113,6 +152,21 @@ class Posts extends React.Component {
                             this.props.currentUser.id === post.user_id &&
                             <button onClick={() => this.handleDelete(post.id)}>Delete</button>
                         }
+                        {' | '}
+
+                        
+                        {/* {
+                         
+                         (this.checkFollow(post.user.id) === true &&
+                         <p>Follow</p>)
+                        } */}
+
+                         
+                                       
+                        
+                    
+                        
+                    
                         <br />
 
                         <hr />

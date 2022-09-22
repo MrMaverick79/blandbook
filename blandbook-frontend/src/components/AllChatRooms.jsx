@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-
+import { Route, HashRouter as Router, Link, Redirect } from 'react-router-dom';
 class AllChatRooms extends React.Component {
 
     state = {
@@ -39,14 +39,15 @@ class AllChatRooms extends React.Component {
                 <h6>All Chat Rooms:</h6>
                 <ul>
                     {this.state.rooms.map(ele=>
-                        <li key={ele.id} onClick={()=>this.handleClick(ele)}>
+                       <Link to={`/chatroom/${ele.id}`}> <li key={ele.id} onClick={()=>this.handleClick(ele)}>
                             <img src={ele.image} alt={ele.title}/>
                             <br />
                             <p>{ele.title}</p>
-                        </li>
+                        </li></Link>
                         )}
-
+                    <li><Link to={`/newroom/`}>Add new</Link></li>
                 </ul>
+                
             </div>
         )
     }
